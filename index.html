@@ -173,6 +173,11 @@ h3 { font-size: 17px; }
 .cta { display: flex; flex-wrap: wrap; gap: 10px; }
 .btn.ghost { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
 .howto { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.post { white-space: pre-wrap; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; font-size: 15px; margin: 0; }
+.postbox { position: relative; display: flex; flex-direction: column; gap: 10px; }
+.quote { background: var(--accent); color: var(--on-accent); border-radius: 12px; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; }
+.quote p { margin: 0; font-family: var(--font-display); font-size: clamp(20px, 3.6vw, 26px); line-height: 1.3; font-weight: 700; text-wrap: balance; }
+.quote span { font-size: 15px; opacity: .9; }
 .modlist { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; }
 
 @media (max-width: 860px) {
@@ -586,7 +591,12 @@ function renderOverview() {
         <h2>${m.title}</h2>
         <p>${m.days} días · ${m.topics.length} temas · ${p.n === p.total ? 'Completado' : p.n ? p.n + ' de ' + p.total + ' partes' : 'Sin empezar'}</p>
         <div class="track" aria-hidden="true"><div class="fill" style="width:${p.n / p.total * 100}%"></div></div>
-      </a>`; }).join('')}</div>
+      </a>`; }).join('')}
+      <a class="mod intro" href="#modulo-11">
+        <span class="mod-num">11</span>
+        <h2>Agradecimiento y siguientes pasos</h2>
+        <p>El cierre de la ruta: qué hacer después, cómo compartir tu logro y cómo apoyar el proyecto.</p>
+      </a></div>
     <p class="note">Criterios de los videos: publicados desde 2025, con más de 10 mil vistas y comentarios que respaldan que fueron útiles. Las lecturas están en español y no piden registro. Algunas herramientas, como Claude, GitHub o n8n en la nube, sí piden una cuenta gratuita para usarlas.</p>
     ${supportBlock()}
     <p class="foot">Creado y recopilado por <a href="${LINKEDIN}" target="_blank" rel="noopener">Alfredo Diego Amez Mendes</a>.</p>
@@ -620,7 +630,7 @@ function renderModule(m) {
     : tk.data ? resCard('data', tk.data[0], tk.data[1], tk.data[2]) + `<p class="warn">${tk.dataNote}</p>` : '';
   app.innerHTML = `
   <header class="hero"><div class="wrap hero-grid"><div class="hero-main">
-    <div class="crumbs"><a href="#inicio">← Ruta completa</a>${prev ? `<a href="#modulo-${prev.id}">Módulo ${prev.id}</a>` : '<a href="#modulo-0">Módulo 0</a>'}${next ? `<a href="#modulo-${next.id}">Módulo ${next.id} →</a>` : ''}</div>
+    <div class="crumbs"><a href="#inicio">← Ruta completa</a>${prev ? `<a href="#modulo-${prev.id}">Módulo ${prev.id}</a>` : '<a href="#modulo-0">Módulo 0</a>'}${next ? `<a href="#modulo-${next.id}">Módulo ${next.id} →</a>` : '<a href="#modulo-11">Módulo 11 →</a>'}</div>
     <span class="eyebrow">Ruta IA Data Analyst 2027 · Módulo ${m.id} de ${MODULES.length}</span>
     <h1>${m.title}</h1>
     <p>${m.lead}</p>
@@ -673,7 +683,7 @@ function renderModule(m) {
         <p class="warn">Compártela: publica una captura y tu conclusión en LinkedIn contando qué aprendiste.</p>
       </section>
       ${supportBlock()}
-      ${next ? `<a class="next" href="#modulo-${next.id}"><span><b>Siguiente: Módulo ${next.id} · ${next.title}</b><br><span>${next.days} días · ${next.topics.length} temas</span></span><span aria-hidden="true">→</span></a>` : `<a class="next" href="#inicio"><span><b>¡Terminaste la ruta!</b><br><span>Vuelve a la vista general para revisar tu avance.</span></span><span aria-hidden="true">→</span></a>`}
+      ${next ? `<a class="next" href="#modulo-${next.id}"><span><b>Siguiente: Módulo ${next.id} · ${next.title}</b><br><span>${next.days} días · ${next.topics.length} temas</span></span><span aria-hidden="true">→</span></a>` : `<a class="next" href="#modulo-11"><span><b>Siguiente: Módulo 11 · Agradecimiento y siguientes pasos</b><br><span>El cierre de la ruta y lo que viene para ti.</span></span><span aria-hidden="true">→</span></a>`}
       <p class="foot">Creado y recopilado por <a href="${LINKEDIN}" target="_blank" rel="noopener">Alfredo Diego Amez Mendes</a>.</p>
     </main>
   </div>`;
@@ -791,7 +801,7 @@ function renderModule0() {
     </section>
     <section class="block">
       <div class="block-head"><div><span class="kicker">Mapa</span><h2>Los ${MODULES.length} módulos de la ruta</h2></div><span class="days">${TOTAL_DAYS} días · 2 horas diarias</span></div>
-      <ol class="modlist">${MODULES.map(m => `<li><a href="#modulo-${m.id}">${m.title}</a> · ${m.days} días</li>`).join('')}</ol>
+      <ol class="modlist">${MODULES.map(m => `<li><a href="#modulo-${m.id}">${m.title}</a> · ${m.days} días</li>`).join('')}<li><a href="#modulo-11">Agradecimiento y siguientes pasos</a></li></ol>
     </section>
     <section class="block">
       <div class="block-head"><div><span class="kicker">Contacto</span><h2>¿Tienes dudas o consultas?</h2></div></div>
@@ -804,10 +814,71 @@ function renderModule0() {
   document.title = 'Módulo 0 · Bienvenida';
 }
 
+const LINKEDIN_POST = `🎓 ¡Terminé la Ruta IA Data Analyst 2027!
+
+Durante ${TOTAL_DAYS} días aprendí Excel, SQL, Python, Power BI e IA generativa aplicada al análisis de datos, y terminé con un proyecto de portafolio propio.
+
+Lo que más me sirvió: [escribe aquí lo que más te ayudó]
+
+Gracias a Alfredo Amez por crear esta ruta gratuita para quienes queremos ser AI Data Analyst. Si estás empezando, te la recomiendo:
+https://alfredoamez-data.github.io/RutaGratisAnalistaDatos/
+
+#DataAnalyst #InteligenciaArtificial #AnálisisDeDatos #RutaIADataAnalyst`;
+
+function renderModule11() {
+  app.innerHTML = `
+  <header class="hero"><div class="wrap hero-grid"><div class="hero-main">
+    <div class="crumbs"><a href="#inicio">← Ruta completa</a><a href="#modulo-10">Módulo 10</a></div>
+    <span class="eyebrow">Ruta IA Data Analyst 2027 · Módulo 11</span>
+    <h1>Agradecimiento y siguientes pasos</h1>
+    <p>Llegaste al final de la ruta. Aquí tienes cómo seguir creciendo, cómo compartir tu logro y cómo apoyar para que esta ruta siga siendo gratuita.</p>
+    <div class="meta"><span class="chip">Cierre de la ruta</span><span class="chip">Gratis y sin registro</span></div>
+  </div>${qrBadge()}</div></header>
+  <main class="wrap overview" style="max-width:820px">
+    <section class="block">
+      <div class="block-head"><div><span class="kicker">Gracias</span><h2>¡Gracias por llegar hasta aquí!</h2></div></div>
+      <p>Completar ${TOTAL_DAYS} días de estudio requiere constancia, y la tuviste. Hoy sabes analizar datos con Excel, SQL y Python, construir dashboards en Power BI y trabajar con inteligencia artificial con criterio. Gracias por confiar en esta ruta y por darle tu tiempo.</p>
+    </section>
+    <section class="block">
+      <div class="block-head"><div><span class="kicker">Lo que viene</span><h2>Tus siguientes pasos</h2></div></div>
+      <ol class="tasks">
+        <li><b>Haz 2 proyectos más</b> para tu portafolio, con temas de la industria donde quieres trabajar.</li>
+        <li><b>Actualiza tu LinkedIn y tu CV</b> con las herramientas que dominas y enlaza tu repositorio de GitHub.</li>
+        <li><b>Postula</b> a prácticas y puestos junior de analista de datos. Prepárate explicando tu proyecto final de punta a punta.</li>
+        <li><b>Considera una certificación</b> cuando estés listo, por ejemplo PL-300 (Power BI Data Analyst) de Microsoft.</li>
+        <li><b>Sigue aprendiendo cada semana:</b> la IA cambia rápido y el analista que se actualiza es el que más crece.</li>
+      </ol>
+    </section>
+    <section class="block">
+      <div class="block-head"><div><span class="kicker">Comparte</span><h2>¿La ruta te ayudó? Publícalo en LinkedIn y etiquétame</h2></div></div>
+      <p>Compartir tu logro te da visibilidad ante reclutadores y ayuda a que más personas encuentren esta ruta gratuita. Al escribir tu publicación, escribe <b>@Alfredo Amez</b> y elige mi perfil para etiquetarme: así podré felicitarte y compartir tu avance.</p>
+      <div class="postbox">
+        <pre class="post" id="post-li">${esc(LINKEDIN_POST)}</pre>
+        <div class="cta"><button class="btn" type="button" id="copy-post">Copiar publicación</button><a class="btn ghost" href="${LINKEDIN}" target="_blank" rel="noopener">Ver mi perfil de LinkedIn</a></div>
+      </div>
+      <p class="warn">Agrega una captura de tu dashboard o de tu proyecto final: las publicaciones con imagen llegan a más personas.</p>
+    </section>
+    ${supportBlock()}
+    <section class="quote" aria-label="Mensaje final">
+      <p>No importa desde dónde empezaste: importa que no te detuviste. Cada consulta, cada dashboard y cada error corregido te acercaron a tu meta. Sigue avanzando por tu objetivo; tu primer trabajo como AI Data Analyst está más cerca de lo que crees.</p>
+      <span>— Alfredo Amez</span>
+    </section>
+    <p class="foot">Creado y recopilado por <a href="${LINKEDIN}" target="_blank" rel="noopener">Alfredo Diego Amez Mendes</a>.</p>
+  </main>`;
+  document.title = 'Módulo 11 · Agradecimiento y siguientes pasos';
+  const btn = document.getElementById('copy-post');
+  btn.addEventListener('click', () => {
+    const el = document.getElementById('post-li');
+    const ok = () => { btn.textContent = 'Publicación copiada'; setTimeout(() => btn.textContent = 'Copiar publicación', 1800); };
+    const sel = () => { const r = document.createRange(); r.selectNodeContents(el); const g = getSelection(); g.removeAllRanges(); g.addRange(r); };
+    try { navigator.clipboard.writeText(el.textContent).then(ok).catch(sel); } catch (e) { sel(); }
+  });
+}
+
 function route() {
   const h = location.hash.replace('#', '');
   const m = MODULES.find(x => 'modulo-' + x.id === h);
-  if (h === 'modulo-0') renderModule0(); else if (m) renderModule(m); else renderOverview();
+  if (h === 'modulo-0') renderModule0(); else if (h === 'modulo-11') renderModule11(); else if (m) renderModule(m); else renderOverview();
   window.scrollTo(0, 0);
 }
 addEventListener('hashchange', route);

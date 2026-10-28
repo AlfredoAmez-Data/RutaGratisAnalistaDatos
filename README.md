@@ -25,6 +25,7 @@ Cada módulo incluye:
 | 8 | Calidad, ética y gobierno de la IA | 6 |
 | 9 | Comunicación y negocio | 6 |
 | 10 | Proyecto final con IA | 10 |
+| 11 | Agradecimiento y siguientes pasos | — |
 
 Tu avance se guarda en tu navegador. ¿Encontraste un video que ya no está disponible? Avísalo en los [issues](https://github.com/AlfredoAmez-Data/RutaGratisAnalistaDatos/issues).
 
