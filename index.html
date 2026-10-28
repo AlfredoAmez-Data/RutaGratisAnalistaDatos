@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ruta gratuita de 10 módulos para convertirte en IA Data Analyst: lecturas, videos verificados, cuestionarios y tareas aplicadas.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px;font-family:system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Ruta IA Data Analyst 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: vista "Ruta" con tarjetas de los 10 módulos; vista de módulo con índice fijo a la izquierda
+   (barra horizontal en móvil) + columna de lectura. El orden es un recorrido real de días, por eso se numera. */
+:root {
+  --bg: #f3f6f7; --surface: #ffffff; --fg: #15222a; --muted: #5a6a73; --line: #d8e1e5;
+  --accent: #1d5f86; --accent-soft: #e2edf4; --ok: #1d7a46; --ok-soft: #e1f2e7;
+  --bad: #c0362c; --bad-soft: #fbe5e3; --idea: #f1ecdf; --idea-line: #c9a24a; --on-accent: #ffffff;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1518; --surface: #162026; --fg: #e5edf0; --muted: #98a9b1; --line: #29383f;
+    --accent: #7cbbe0; --accent-soft: #1a3140; --ok: #5fd08d; --ok-soft: #163325;
+    --bad: #ff8a7f; --bad-soft: #3a1d1b; --idea: #2a2618; --idea-line: #c9a24a; --on-accent: #0e1518;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1518; --surface: #162026; --fg: #e5edf0; --muted: #98a9b1; --line: #29383f;
+  --accent: #7cbbe0; --accent-soft: #1a3140; --ok: #5fd08d; --ok-soft: #163325;
+  --bad: #ff8a7f; --bad-soft: #3a1d1b; --idea: #2a2618; --idea-line: #c9a24a; --on-accent: #0e1518;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+a { color: var(--accent); }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+button { font: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.wrap { max-width: 1080px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.hero { background: var(--surface); border-bottom: 1px solid var(--line); }
+.hero .wrap { padding-block: 32px 26px; display: flex; flex-direction: column; gap: 14px; }
+.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 14px; }
+.crumbs a { text-decoration: none; font-weight: 500; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.hero h1 { font-size: clamp(30px, 6vw, 48px); line-height: 1.05; font-weight: 800; max-width: 20ch; }
+.hero p { margin: 0; color: var(--muted); max-width: 62ch; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 13px; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--fg); }
+.progress { display: flex; align-items: center; gap: 12px; max-width: 520px; }
+.track { flex: 1; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; min-width: 0; }
+.fill { height: 100%; width: 0; background: var(--ok); transition: width .35s ease; }
+.progress span { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Vista Ruta */
+.overview { padding-block: 32px 72px; display: flex; flex-direction: column; gap: 24px; }
+.mods { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.mod { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; align-items: start; text-decoration: none; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; transition: border-color .15s; }
+.mod:hover { border-color: var(--accent); }
+.mod-num { grid-row: span 3; font-family: var(--font-display); font-weight: 800; font-size: 32px; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; min-width: 1.6ch; }
+.mod.done .mod-num { color: var(--ok); }
+.mod h2 { font-size: 19px; line-height: 1.25; }
+.mod p { margin: 0; font-size: 14px; color: var(--muted); }
+.mod .track { height: 5px; margin-top: 6px; }
+.note { font-size: 14px; color: var(--muted); max-width: 70ch; margin: 0; }
+
+/* Vista Módulo */
+.layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; padding-block: 32px 72px; }
+nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; display: flex; flex-direction: column; gap: 2px; }
+.toc-title { font-size: 12px; font-family: var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.toc button { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; color: var(--fg); background: none; border: 0; text-align: left; font-size: 14px; cursor: pointer; }
+.toc button:hover { background: var(--accent-soft); }
+.dot { flex: none; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--line); display: grid; place-items: center; }
+.dot svg { width: 11px; height: 11px; opacity: 0; }
+.toc button.done .dot { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+.toc button.done .dot svg { opacity: 1; }
+.content { display: flex; flex-direction: column; gap: 28px; max-width: 700px; min-width: 0; }
+.block { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 16px; scroll-margin-top: 80px; }
+.block-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; }
+.block-head h2 { font-size: 22px; line-height: 1.2; }
+.kicker { font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: .06em; text-transform: uppercase; }
+.days { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.block p { margin: 0; }
+.goals { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.step { border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 4px; background: var(--bg); }
+.step b { font-family: var(--font-display); font-size: 16px; }
+.step span { font-size: 14px; color: var(--muted); }
+.res { display: flex; align-items: center; gap: 14px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; text-decoration: none; color: var(--fg); background: var(--bg); transition: border-color .15s, background .15s; }
+.res:hover { border-color: var(--accent); background: var(--accent-soft); }
+.res-icon { flex: none; width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.res-icon.video { background: var(--bad-soft); color: var(--bad); }
+.res-icon svg { width: 20px; height: 20px; }
+.res-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.res-type { font-size: 12px; color: var(--muted); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .04em; }
+.res-title { font-weight: 500; }
+.res-go { flex: none; color: var(--muted); }
+.novideo { border: 1px dashed var(--line); border-radius: 10px; padding: 12px 14px; font-size: 14px; color: var(--muted); }
+.idea { background: var(--idea); border-left: 3px solid var(--idea-line); border-radius: 0 8px 8px 0; padding: 12px 16px; font-size: 15px; }
+.check { display: inline-flex; align-items: center; gap: 10px; align-self: flex-start; font-size: 14px; font-weight: 500; color: var(--fg); background: transparent; border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 16px 8px 10px; cursor: pointer; }
+.check:hover { border-color: var(--ok); }
+.check .box { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--muted); display: grid; place-items: center; }
+.check .box svg { width: 12px; height: 12px; opacity: 0; }
+.check[aria-pressed="true"] { border-color: var(--ok); background: var(--ok-soft); }
+.check[aria-pressed="true"] .box { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+.check[aria-pressed="true"] .box svg { opacity: 1; }
+.prompts { display: flex; flex-direction: column; gap: 10px; }
+.prompt { display: flex; gap: 10px; align-items: flex-start; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.prompt p { flex: 1; min-width: 0; font-size: 15px; font-style: italic; }
+.copy { flex: none; font-size: 13px; color: var(--accent); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+.warn { font-size: 15px; color: var(--muted); }
+.qbar { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.qbar .track { height: 6px; }
+.qbar .fill { background: var(--accent); }
+.q { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-direction: column; gap: 12px; }
+.q-head { display: flex; gap: 12px; align-items: baseline; }
+.q-num { font-family: var(--font-mono); font-size: 13px; color: var(--accent); flex: none; }
+.q-text { font-weight: 500; min-width: 0; }
+.data { font-family: var(--font-mono); font-size: 14px; background: var(--accent-soft); padding: 1px 6px; border-radius: 4px; }
+.opts { display: grid; gap: 8px; }
+.opt { display: flex; align-items: center; gap: 12px; width: 100%; color: var(--fg); text-align: left; background: var(--bg); border: 1.5px solid var(--line); border-radius: 8px; padding: 10px 14px; cursor: pointer; transition: border-color .15s, background .15s; }
+.opt:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
+.opt:disabled { cursor: default; }
+.letter { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-mono); font-size: 13px; border: 1.5px solid var(--line); color: var(--muted); }
+.opt-text { flex: 1; min-width: 0; }
+.mark { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; }
+.mark svg { width: 16px; height: 16px; }
+.opt.is-ok { border-color: var(--ok); background: var(--ok-soft); }
+.opt.is-ok .mark { background: var(--ok); color: var(--surface); }
+.opt.is-bad { border-color: var(--bad); background: var(--bad-soft); }
+.opt.is-bad .mark { background: var(--bad); color: var(--surface); }
+.opt.is-answer { border-color: var(--ok); border-style: dashed; }
+.opt.is-dim { opacity: .55; }
+.feedback { font-size: 15px; padding: 12px 14px; border-radius: 8px; background: var(--bg); border: 1px solid var(--line); }
+.feedback.ok strong { color: var(--ok); }
+.feedback.bad strong { color: var(--bad); }
+.final { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.score { font-family: var(--font-display); font-size: 44px; line-height: 1; font-weight: 800; font-variant-numeric: tabular-nums; }
+.score span { font-size: 20px; color: var(--muted); font-weight: 600; }
+.btn { font-weight: 600; color: var(--on-accent); background: var(--accent); border: 0; border-radius: 8px; padding: 10px 18px; cursor: pointer; text-decoration: none; display: inline-block; }
+.context { background: var(--bg); border-radius: 10px; padding: 14px 16px; font-size: 15px; }
+.tasks { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; }
+.tasks li::marker { font-family: var(--font-mono); color: var(--accent); }
+code { font-family: var(--font-mono); font-size: 13.5px; background: var(--accent-soft); padding: 1px 6px; border-radius: 4px; }
+.sqlbox { position: relative; }
+.sqlbox pre { margin: 0; max-height: 260px; overflow: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.5; }
+.sqlbox .copy { position: absolute; top: 8px; right: 8px; }
+.criteria { display: flex; flex-direction: column; gap: 8px; }
+.criteria label { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; cursor: pointer; }
+.criteria input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--ok); flex: none; }
+h3 { font-size: 17px; }
+.next { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; background: var(--accent); color: var(--on-accent); border-radius: 12px; padding: 20px 24px; text-decoration: none; }
+.next b { font-family: var(--font-display); font-size: 18px; }
+.next span { font-size: 14px; }
+.foot { font-size: 13px; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-top: 0; }
+  nav.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; flex-direction: row; overflow-x: auto; gap: 4px; padding-block: 10px; background: var(--bg); border-bottom: 1px solid var(--line); margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px))); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); scrollbar-width: none; }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+  .toc-title { display: none; }
+  .toc button { white-space: nowrap; border: 1px solid var(--line); background: var(--surface); padding: 6px 12px; }
+  .content { max-width: none; }
+  .mods { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) { .steps { grid-template-columns: minmax(0, 1fr); } .block { padding: 18px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+// Contenido de la Ruta IA Data Analyst 2027. Videos verificados: publicados desde 2025, 10k+ vistas, comentarios que respaldan su utilidad.
+const YT = id => 'https://www.youtube.com/watch?v=' + id;
+const MODULES = [
+{
+  id: 1, title: 'Pensamiento analítico y estadística', days: 10,
+  lead: 'Aprende a pensar como analista de datos: hacer las preguntas correctas, medir con KPIs y resumir datos con estadística.',
+  goals: ['Explicar qué hace un analista de datos y los 4 tipos de análisis.', 'Convertir un problema de negocio en preguntas que se respondan con datos.', 'Definir KPIs claros con el método SMART.', 'Calcular e interpretar media, mediana, moda, rango y desviación estándar.', 'Entender qué es una distribución de probabilidad y por qué la normal es tan usada.'],
+  topics: [
+    { t: 'El analista de datos y los 4 tipos de análisis', d: 'Días 1-2', read: ['Los cuatro tipos de análisis de datos: una guía completa', 'https://datademia.es/blog/los-cuatro-tipos-de-analisis-de-datos-una-guia-completa', '6 min'], video: ['Qué es ser analista de datos y cómo funciona en verdad (realidad, salario, herramientas e IA)', YT('YhJ8L2hGZ48'), 'may 2026 · 31 mil vistas · 13 min'], idea: 'Cada tipo de análisis responde una pregunta distinta: ¿qué pasó? (descriptivo), ¿por qué pasó? (diagnóstico), ¿qué podría pasar? (predictivo) y ¿qué deberíamos hacer? (prescriptivo).' },
+    { t: 'Pensamiento analítico, preguntas de negocio y KPIs', d: 'Días 3-4', read: ['Cómo crear KPIs que lleven tu empresa al éxito', 'https://www.tableau.com/es-mx/learn/articles/how-to-create-kpis', '5 min'], video: ['Top KPIs que todo analista debería entender', YT('B4ZxyyL0-08'), 'mar 2026 · 85 mil vistas · 21 min'], idea: 'Un buen análisis empieza con una buena pregunta. "¿Cómo van las ventas?" es vaga; "¿Qué categoría redujo más sus ventas este trimestre frente al anterior?" se puede responder con datos.' },
+    { t: 'Estadística descriptiva', d: 'Días 5-7', read: ['Estadística descriptiva: qué es, objetivo, tipos y ejemplos', 'https://questionpro.com/blog/es/estadistica-descriptiva', '14 min'], video: ['¿Qué es la estadística? Introducción al análisis de datos', YT('jMC1p_CV170'), 'jun 2025 · 72 mil vistas · 20 min'], idea: 'El promedio puede engañar. Si hay un valor muy extremo, la mediana describe mejor el caso típico.' },
+    { t: 'Probabilidad y distribuciones', d: 'Día 8', read: ['4 distribuciones de probabilidad básicas a usar como Data Scientist', 'https://datasciencepe.substack.com/p/4-distribuciones-de-probabilidad', '4 min'], video: ['¿Qué es una distribución de probabilidad? Fundamentos de ciencia de datos', YT('cD7ErDI-424'), 'jun 2025 · 11 mil vistas · 17 min'], idea: 'Muchos datos reales, como estaturas o tiempos de entrega, se agrupan alrededor de un valor central con forma de campana: la distribución normal.' }
+  ],
+  ia: { prompts: ['Soy analista de una tienda online. Las ventas bajaron 15% este mes. Dame 5 preguntas de negocio para investigar la causa y dime qué tipo de análisis es cada una.', 'Explícame con un ejemplo de ventas por qué la mediana a veces es mejor que el promedio.', 'Revisa si este KPI cumple el método SMART y mejóralo: [escribe tu KPI]'] },
+  quizDay: 'Día 9',
+  quiz: [
+    ['Un gerente pregunta: "¿Por qué bajaron las ventas en marzo?". ¿Qué tipo de análisis necesita?', ['Descriptivo', 'Diagnóstico', 'Predictivo', 'Prescriptivo'], 1, 'El análisis diagnóstico busca las causas de lo que pasó: responde "¿por qué?".'],
+    ['"¿Cuánto venderemos el próximo trimestre?" corresponde al análisis:', ['Descriptivo', 'Diagnóstico', 'Predictivo', 'Prescriptivo'], 2, 'Estimar lo que podría pasar en el futuro es análisis predictivo.'],
+    ['¿Cuál de estas preguntas de negocio está mejor formulada para un análisis de datos?', ['¿Cómo está la empresa?', '¿Los clientes están contentos?', '¿Qué región tuvo la mayor caída en ventas en el último trimestre frente al anterior?', '¿Deberíamos vender más?'], 2, 'Es específica: dice qué medir (ventas), cómo compararlo (por región) y en qué periodo.'],
+    ['En el método SMART para definir KPIs, la "T" (Time-bound) significa que el KPI:', ['Debe ser técnico', 'Debe tener un plazo definido', 'Debe medirse en tiempo real', 'Debe ser total'], 1, 'Time-bound significa "con plazo": el KPI dice para cuándo debe lograrse la meta.'],
+    ['¿Cuál de estos es un KPI bien definido?', ['Mejorar las ventas', 'Tener más clientes felices', 'Aumentar la tasa de recompra de 20% a 25% antes de diciembre', 'Vender lo máximo posible'], 2, 'Tiene una métrica, un valor de partida, una meta numérica y un plazo.'],
+    ['Los salarios de 5 personas son <span class="data">1,500 · 1,600 · 1,700 · 1,800 · 15,000</span>. ¿Qué medida representa mejor el salario típico?', ['La media', 'La mediana', 'El rango', 'La varianza'], 1, 'El valor 15,000 sube la media a 4,320. La mediana (1,700) no se deja arrastrar por ese valor extremo.'],
+    ['La moda de los datos <span class="data">3, 5, 5, 7, 8, 5, 9</span> es:', ['5', '6', '7', '9'], 0, 'La moda es el valor que más se repite: el 5 aparece tres veces.'],
+    ['Una desviación estándar alta indica que los datos:', ['Están muy cerca del promedio', 'Están muy dispersos respecto al promedio', 'Tienen errores', 'Siguen una distribución normal'], 1, 'La desviación estándar mide cuánto se alejan los datos del promedio. Más alta, más dispersión.'],
+    ['En una distribución normal, ¿qué porcentaje aproximado de los datos está a menos de 1 desviación estándar del promedio?', ['50%', '68%', '95%', '99.7%'], 1, 'Regla 68-95-99.7: cerca del 68% está a 1 desviación, 95% a 2 y 99.7% a 3.'],
+    ['Una IA te dice que el promedio de <span class="data">10, 20 y 60</span> es 20. ¿Qué haces?', ['Lo aceptas, la IA no se equivoca', 'Lo verificas: el promedio es 30 (y 20 es la mediana)', 'Lo cambias por la moda', 'Le pides que lo redondee'], 1, '(10 + 20 + 60) / 3 = 30. La IA confundió el promedio con la mediana. Verifica siempre sus cálculos.']
+  ],
+  task: { day: 'Día 10',
+    context: 'Trabajas como analista en una tienda online que quiere expandirse a otro país de Latinoamérica. Tu jefe te pide una primera mirada con datos sobre el uso de internet en la región.',
+    data: ['Personas que usan Internet (% de la población)', 'https://datos.bancomundial.org/indicador/IT.NET.USER.ZS', 'Datos · Banco Mundial · sin registro'],
+    dataNote: 'En la página, descarga el archivo CSV y ábrelo en Excel o LibreOffice Calc.',
+    steps: ['Escribe <b>3 preguntas de negocio</b> para la decisión de expansión e indica qué tipo de análisis es cada una.', 'Define <b>2 KPIs</b> con el método SMART para medir el éxito de la expansión.', 'Elige <b>10 países de Latinoamérica</b> y, para el último año con datos, calcula media, mediana, desviación estándar, mínimo y máximo. Usa <code>=PROMEDIO()</code> <code>=MEDIANA()</code> <code>=DESVEST.M()</code> <code>=MIN()</code> <code>=MAX()</code>', '¿La media y la mediana son parecidas o muy distintas? ¿Hay algún país atípico? Explica qué significa.', 'Escribe una <b>conclusión de 5 líneas</b> con una recomendación: ¿a qué país conviene entrar primero y por qué?', '<b>Bonus con IA:</b> pide a una IA que critique tu conclusión. Anota qué te aportó y en qué se equivocó.'],
+    criteria: ['Tus preguntas son específicas y se pueden responder con datos.', 'Tus KPIs tienen meta numérica y plazo.', 'Tus cálculos son correctos y usaste el mismo año para todos los países.', 'Tu conclusión termina en una recomendación clara.']
+  }
+},
+{
+  id: 2, title: 'Excel + IA', days: 14,
+  lead: 'Domina la herramienta que más piden las empresas: fórmulas clave, limpieza con Power Query, tablas dinámicas, dashboards y Excel con IA.',
+  goals: ['Usar las funciones esenciales, incluida BUSCARX, para cruzar y resumir datos.', 'Limpiar y transformar datos con Power Query sin copiar y pegar.', 'Resumir miles de filas con tablas dinámicas.', 'Construir un dashboard claro en Excel.', 'Usar la IA para crear fórmulas y revisar análisis.'],
+  topics: [
+    { t: 'Excel esencial: fórmulas y funciones', d: 'Días 1-3', read: ['Función BUSCARX', 'https://support.microsoft.com/es-es/office/funci%C3%B3n-buscarx-b7fd680e-6d10-43e6-84f9-88eae8bf5929', '~8 min'], video: ['Curso completo de Excel 2026: básico e intermedio en 3 horas', YT('Aj_ftnGqQcw'), 'feb 2026 · 91 mil vistas · 3 h 5 min'], idea: 'Antes de analizar, convierte tu rango en tabla (Ctrl + T): las fórmulas se extienden solas y los filtros quedan listos.' },
+    { t: 'Limpieza de datos con Power Query', d: 'Días 4-5', read: ['Acerca de Power Query en Excel', 'https://support.microsoft.com/es-es/excel/about-power-query-in-excel', '~6 min'], video: ['¿Qué es Power Query y para qué sirve? Ahorra horas de trabajo', YT('PlFerHbt9lA'), 'feb 2026 · 65 mil vistas · 17 min'], idea: 'Power Query guarda cada paso de limpieza. El próximo mes solo actualizas y los mismos pasos se aplican a los datos nuevos.' },
+    { t: 'Tablas dinámicas', d: 'Días 6-8', read: ['Crear una tabla dinámica para analizar datos', 'https://support.microsoft.com/es-es/office/crear-una-tabla-din%C3%A1mica-para-analizar-datos-de-una-hoja-de-c%C3%A1lculo-a9a84538-bfe9-40a9-a8e9-f99134456576', '~7 min'], video: ['Domina las tablas dinámicas en Excel desde cero: curso completo', YT('tN6_ZEaqYBo'), 'oct 2025 · 184 mil vistas · 1 h 15 min'], idea: 'Una tabla dinámica responde preguntas en segundos: arrastra la categoría a filas, la métrica a valores y el periodo a columnas.' },
+    { t: 'Dashboards en Excel', d: 'Días 9-10', read: ['¿Cómo crear un buen dashboard o cuadro de mando?', 'https://datademia.es/blog/como-crear-un-buen-dashboard-o-cuadro-de-mando', '~7 min'], video: ['Cómo crear un dashboard profesional en Excel paso a paso', YT('Uwz-7EZBUbM'), 'oct 2025 · 97 mil vistas · 29 min'], idea: 'Un dashboard no es un collage de gráficos: cada elemento debe responder una pregunta del usuario que lo va a leer.' },
+    { t: 'Excel con inteligencia artificial', d: 'Días 11-12', read: ['ChatGPT para fórmulas de Excel: cómo usar la IA para crearlas', 'https://www.xataka.com/basics/chatgpt-para-formulas-excel-como-usar-inteligencia-artificial-para-crearlas', '~6 min'], video: ['Curso Excel + Inteligencia Artificial: domina Excel con IA desde cero', 'https://www.youtube.com/playlist?list=PLfQDAAceIU5k', 'Lista de reproducción · jul 2026 · 96 mil vistas el cap. 1'], idea: 'Describe tu tabla a la IA (columnas y ejemplo de filas) antes de pedir una fórmula: así acierta mucho más.' }
+  ],
+  ia: { prompts: ['Tengo una tabla con columnas Fecha, Región, Producto, Unidades y Precio. Escríbeme la fórmula de Excel en español para sumar las ventas de la región "Norte" en marzo y explícamela.', 'Mi BUSCARX devuelve #N/A en algunas filas. Estas son 3 filas de ejemplo: [pega]. ¿Qué puede estar pasando?', 'Propón un diseño de dashboard de una página para un gerente comercial: qué 3 indicadores y qué 2 gráficos pondrías y por qué.'] },
+  quizDay: 'Día 13',
+  quiz: [
+    ['¿Qué ventaja tiene BUSCARX frente a BUSCARV?', ['Solo funciona con números', 'Puede buscar hacia la izquierda y devuelve un valor por defecto si no encuentra', 'Es más lenta pero más exacta', 'No necesita una columna de búsqueda'], 1, 'BUSCARX busca en cualquier dirección y permite definir qué mostrar cuando no encuentra el valor.'],
+    ['¿Qué atajo convierte un rango en una tabla de Excel?', ['Ctrl + T', 'Ctrl + P', 'Ctrl + D', 'Alt + F4'], 0, 'Ctrl + T crea una tabla con formato, filtros y fórmulas que se extienden solas.'],
+    ['Recibes cada mes el mismo reporte desordenado. ¿Qué herramienta te evita repetir la limpieza a mano?', ['Formato condicional', 'Power Query', 'Validación de datos', 'Inmovilizar paneles'], 1, 'Power Query guarda los pasos de transformación y los vuelve a aplicar al actualizar.'],
+    ['¿Qué fórmula suma las ventas de la columna D solo cuando la región (columna B) es "Norte"?', ['<span class="data">=SUMA(D:D)</span>', '<span class="data">=SUMAR.SI(B:B;"Norte";D:D)</span>', '<span class="data">=CONTAR.SI(B:B;"Norte")</span>', '<span class="data">=PROMEDIO(D:D)</span>'], 1, 'SUMAR.SI(rango_criterio; criterio; rango_suma) suma solo las filas que cumplen la condición.'],
+    ['En una tabla dinámica, ¿dónde colocas la métrica que quieres sumar (por ejemplo, ventas)?', ['Filtros', 'Filas', 'Columnas', 'Valores'], 3, 'El área Valores es donde se calculan sumas, conteos o promedios.'],
+    ['Quieres ver ventas por región y por mes en una tabla dinámica. Una buena configuración es:', ['Región en filas y mes en columnas', 'Ventas en filtros', 'Mes en valores', 'Región en valores'], 0, 'Las categorías van en filas y columnas; la métrica va en valores.'],
+    ['¿Cuál es la principal regla de un buen dashboard?', ['Usar la mayor cantidad de gráficos posible', 'Que cada elemento responda una pregunta de su usuario', 'Usar muchos colores para que sea llamativo', 'Mostrar todas las columnas de la base'], 1, 'Un dashboard se diseña para decisiones concretas de una audiencia concreta.'],
+    ['¿Qué gráfico es más adecuado para mostrar la evolución de ventas mes a mes?', ['Circular', 'De líneas', 'De dispersión', 'De radar'], 1, 'Las líneas muestran tendencias a lo largo del tiempo.'],
+    ['Le pides a una IA una fórmula y te da una con comas, pero tu Excel en español usa punto y coma. ¿Qué haces?', ['Concluyes que la IA no sirve', 'Ajustas los separadores y pruebas la fórmula con datos de control', 'La pegas sin revisar', 'Cambias tu Excel a inglés'], 1, 'Adapta la fórmula a tu configuración y compruébala con casos donde ya conoces el resultado.'],
+    ['¿Qué información conviene darle a la IA para obtener una buena fórmula?', ['Solo "hazme una fórmula"', 'Nombres de columnas, ejemplo de filas y el resultado esperado', 'Tu contraseña de Office', 'El archivo completo con datos de clientes reales'], 1, 'Contexto claro y un ejemplo pequeño, sin datos confidenciales, producen mejores respuestas.']
+  ],
+  task: { day: 'Día 14',
+    context: 'Eres analista comercial. La gerencia quiere un resumen de una página para saber qué segmentos y productos generan más ganancia.',
+    data: ['Libro de Excel de ejemplo financiero (Financial Sample)', 'https://learn.microsoft.com/es-es/power-bi/create-reports/sample-financial-download', 'Datos · Microsoft · descarga sin registro'],
+    dataNote: 'Descarga el archivo .xlsx desde la página. Tiene ventas, costos y ganancias por segmento, país y producto.',
+    steps: ['Carga los datos con <b>Power Query</b> y revisa tipos de datos (fechas, números, texto).', 'Crea una <b>tabla dinámica</b> con la ganancia por segmento y por país.', 'Agrega una columna con el <b>margen</b> (ganancia / ventas) usando una fórmula.', 'Arma un <b>dashboard de una página</b> con 3 indicadores clave y 2 gráficos.', 'Escribe 3 conclusiones y una recomendación para la gerencia.', '<b>Bonus con IA:</b> pide a una IA que proponga otra forma de ver los datos y evalúa si tiene sentido.'],
+    criteria: ['Los datos se cargan con Power Query, sin copiar y pegar.', 'La tabla dinámica responde ganancia por segmento y país.', 'El dashboard cabe en una página y se entiende sin explicación.', 'Tus conclusiones citan cifras del análisis.']
+  }
+},
+{
+  id: 3, title: 'SQL + IA', days: 20,
+  lead: 'SQL es la habilidad más pedida en las ofertas de analista. Aprende a consultar bases de datos y a usar la IA para escribir y revisar tus consultas.',
+  goals: ['Explicar qué es una base de datos relacional y para qué sirve SQL.', 'Escribir consultas con SELECT, WHERE, ORDER BY y funciones de agregación.', 'Combinar tablas con JOIN y resumir con GROUP BY.', 'Usar subconsultas para preguntas de negocio más complejas.', 'Usar la IA para escribir, explicar y revisar consultas.'],
+  topics: [
+    { t: 'SQL desde cero', d: 'Días 1-6', read: ['¿Qué es SQL? ¿Qué es una base de datos? Explicado de forma simple', 'https://www.freecodecamp.org/espanol/news/que-es-sql-que-es-una-base-de-datos-sistemas-de-datos-relacionales-explicados-de-forma-simple/', '~10 min'], video: ['Aprende SQL: curso desde cero con MySQL y PostgreSQL', YT('6JBsoPOwPew'), 'mar 2026 · 45 mil vistas · 4 h 15 min'], idea: 'Una consulta se lee en este orden lógico: FROM (de dónde), WHERE (qué filas), GROUP BY (cómo agrupar), SELECT (qué mostrar), ORDER BY (cómo ordenar).' },
+    { t: 'SQL para análisis de datos: JOIN, GROUP BY y subconsultas', d: 'Días 7-15', read: ['¿Qué es un JOIN en SQL?', 'https://datademia.es/blog/que-es-un-join-en-sql', '~7 min'], video: ['SQL para análisis de datos: curso completo (parte 1)', YT('QcWrzAna-Kk'), 'may 2026 · 67 mil vistas · 12 h'], idea: 'INNER JOIN deja solo las filas que coinciden en ambas tablas. LEFT JOIN conserva todas las filas de la tabla izquierda, aunque no tengan pareja.' },
+    { t: 'Cómo usa SQL un analista en su trabajo', d: 'Días 16-17', read: ['SQL vs Excel para analistas de datos: cuándo usar cada uno', 'https://datademia.es/blog/sql-vs-excel-para-analistas-de-datos', '~6 min'], video: ['Cómo uso SQL como analista de datos', YT('NxlIqIu3XEc'), 'oct 2025 · 27 mil vistas · 18 min'], idea: 'En el trabajo real, SQL sirve para traer y preparar los datos; el análisis y la visualización suelen continuar en Excel, Python o Power BI.' }
+  ],
+  ia: { prompts: ['Tengo las tablas ventas(id, fecha, cliente_id, producto_id, cantidad, precio) y clientes(id, nombre, ciudad). Escribe una consulta SQL que muestre las ventas totales por ciudad en 2026 y explícala línea por línea.', 'Revisa esta consulta y dime si tiene errores o si se puede simplificar: [pega tu consulta]', '¿Cuál es la diferencia entre WHERE y HAVING? Dame un ejemplo con ventas.'] },
+  quizDay: 'Día 18',
+  quiz: [
+    ['¿Qué cláusula filtra filas antes de agrupar?', ['HAVING', 'WHERE', 'ORDER BY', 'GROUP BY'], 1, 'WHERE filtra filas individuales; HAVING filtra grupos después de GROUP BY.'],
+    ['¿Qué devuelve <span class="data">SELECT COUNT(*) FROM ventas;</span>?', ['La suma de las ventas', 'El número de filas de la tabla ventas', 'La primera venta', 'Las columnas de la tabla'], 1, 'COUNT(*) cuenta todas las filas.'],
+    ['Quieres todos los clientes, tengan o no ventas. ¿Qué JOIN usas (clientes a la izquierda)?', ['INNER JOIN', 'LEFT JOIN', 'CROSS JOIN', 'Ninguno'], 1, 'LEFT JOIN conserva todas las filas de la tabla izquierda.'],
+    ['¿Para qué sirve GROUP BY?', ['Ordenar resultados', 'Unir tablas', 'Agrupar filas para calcular agregados por categoría', 'Borrar duplicados de la tabla'], 2, 'GROUP BY crea grupos y permite SUM, COUNT o AVG por cada grupo.'],
+    ['¿Qué consulta muestra las ciudades con más de 100 ventas?', ['<span class="data">... WHERE COUNT(*) &gt; 100</span>', '<span class="data">... GROUP BY ciudad HAVING COUNT(*) &gt; 100</span>', '<span class="data">... ORDER BY 100</span>', '<span class="data">... LIMIT 100</span>'], 1, 'Las condiciones sobre agregados van en HAVING.'],
+    ['¿Qué hace <span class="data">ORDER BY total DESC</span>?', ['Ordena de menor a mayor', 'Ordena de mayor a menor', 'Elimina el total', 'Agrupa por total'], 1, 'DESC ordena de forma descendente.'],
+    ['Una subconsulta es:', ['Una consulta dentro de otra consulta', 'Una tabla temporal permanente', 'Un tipo de JOIN', 'Un error de sintaxis'], 0, 'Se usa, por ejemplo, para comparar cada venta con el promedio general.'],
+    ['¿Cuál es la clave que une la tabla ventas con la tabla clientes?', ['ventas.precio = clientes.nombre', 'ventas.cliente_id = clientes.id', 'ventas.id = clientes.ciudad', 'No se pueden unir'], 1, 'La clave foránea cliente_id apunta al id de la tabla clientes.'],
+    ['¿Cuándo conviene más SQL que Excel?', ['Para una lista de 20 filas', 'Para consultar millones de registros guardados en una base de datos', 'Para hacer un gráfico rápido', 'Nunca'], 1, 'SQL trabaja directo sobre la base de datos y escala a grandes volúmenes.'],
+    ['La IA te da una consulta que corre sin errores. ¿Qué haces antes de usar el resultado?', ['Nada, si corre está bien', 'Verificas con un caso que conoces (por ejemplo, el total de un mes)', 'La borras', 'Le cambias el nombre'], 1, 'Que una consulta corra no significa que responda bien la pregunta. Compara con un dato conocido.']
+  ],
+  task: { day: 'Días 19-20',
+    context: 'Eres analista de una pequeña cadena de tiendas. Te dan acceso a su base de datos de ventas y te piden responder preguntas del gerente.',
+    sql: true,
+    dataNote: 'Abre <b>sqliteonline.com</b> (no pide registro), pega el script de abajo y ejecútalo para crear las tablas.',
+    steps: ['¿Cuántas ventas hubo en total y cuánto se vendió en soles?', '¿Cuáles son las ventas totales por ciudad? Ordénalas de mayor a menor.', '¿Qué producto generó más ingresos? Usa JOIN entre ventas y productos.', '¿Qué clientes no han comprado nada? Usa LEFT JOIN.', '¿Qué ventas superan el promedio de todas las ventas? Usa una subconsulta.', '<b>Bonus con IA:</b> pide a una IA que resuelva la pregunta 3 y compara su consulta con la tuya.'],
+    criteria: ['Las 5 consultas corren sin errores.', 'Usaste JOIN, GROUP BY y al menos una subconsulta.', 'Verificaste al menos un resultado a mano.', 'Escribiste una conclusión de 3 líneas para el gerente.']
+  }
+},
+{
+  id: 4, title: 'Python + pandas con IA', days: 20,
+  lead: 'Programa en Python desde cero y usa pandas para limpiar, analizar y visualizar datos, apoyándote en la IA como asistente.',
+  goals: ['Escribir programas básicos en Python: variables, condiciones, bucles y funciones.', 'Cargar, filtrar, agrupar y limpiar datos con pandas.', 'Hacer un análisis exploratorio y gráficos para encontrar patrones.', 'Usar la IA para programar mejor, sin dejar de entender tu código.'],
+  topics: [
+    { t: 'Fundamentos de Python', d: 'Días 1-7', read: ['Python: el lenguaje que debes aprender este año', 'https://datademia.es/blog/python-el-lenguaje-que-debes-aprender-en-2025', '~6 min'], video: ['Curso completo de Python desde cero para principiantes', YT('TkN2i-_4N4g'), 'mar 2025 · 2.3 millones de vistas · 8 h 33 min'], idea: 'Programar se aprende escribiendo código: pausa el video y repite cada ejemplo antes de seguir.' },
+    { t: 'Análisis de datos con pandas', d: 'Días 8-13', read: ['Pandas en Python: ¿qué es y cómo usarlo?', 'https://datademia.es/blog/pandas-de-python-que-es-y-como-usarlo', '~8 min'], video: ['Curso de análisis de datos desde cero con Python (completo)', YT('EaHt4PvGY_A'), 'abr 2025 · 48 mil vistas · 5 h 6 min'], idea: 'Con pandas casi todo empieza igual: df.head() para ver los datos, df.info() para revisar tipos y nulos, y df.describe() para un resumen estadístico.' },
+    { t: 'Análisis exploratorio y proyecto con Python', d: 'Días 14-15', read: ['El EDA en la ciencia de datos: ¿qué es?', 'https://datademia.es/blog/que-es-el-eda-en-la-ciencia-de-datos', '~6 min'], video: ['Proyecto completo de data analytics: Python + IA + Power BI', YT('Gl5Q2MFS4Yw'), 'feb 2025 · 151 mil vistas · 25 min'], idea: 'El análisis exploratorio responde: ¿qué datos tengo?, ¿están completos?, ¿hay valores raros? y ¿qué relaciones se ven a simple vista?' },
+    { t: 'Programar con IA', d: 'Días 16-17', read: ['Programar con IA no es coser y cantar: lo que aprendió un ingeniero', 'https://www.genbeta.com/inteligencia-artificial/este-ingeniero-obtenia-muy-malos-resultados-programando-ia-ha-contado-como-consiguio-ser-productivo-como-le-prometian', '~6 min'], video: ['Te explico cómo realmente debes usar la IA para programar', YT('BdWfEZ2aTAw'), 'may 2025 · 131 mil vistas · 13 min'], idea: 'Pide a la IA que explique el código que te da. Si no puedes explicarlo tú, todavía no lo entiendes.' }
+  ],
+  ia: { prompts: ['Tengo un DataFrame de pandas con columnas fecha, categoria y ventas. Escribe el código para calcular las ventas por mes y categoría, y explícalo paso a paso.', 'Este código me da un error: [pega el error y el código]. Explícame la causa antes de darme la solución.', 'Revisa mi análisis exploratorio y dime qué me faltó revisar: [pega tu código]'] },
+  quizDay: 'Día 18',
+  quiz: [
+    ['¿Qué imprime <span class="data">print(len([4, 8, 15]))</span>?', ['15', '3', '27', 'Error'], 1, 'len() devuelve la cantidad de elementos de la lista: 3.'],
+    ['¿Qué tipo de dato es <span class="data">"2026"</span> (con comillas)?', ['Entero', 'Decimal', 'Texto (str)', 'Booleano'], 2, 'Las comillas lo convierten en texto, aunque contenga números.'],
+    ['¿Qué método de pandas muestra las primeras filas de un DataFrame?', ['df.first()', 'df.head()', 'df.top()', 'df.show()'], 1, 'df.head() muestra por defecto las primeras 5 filas.'],
+    ['¿Qué hace <span class="data">df.isnull().sum()</span>?', ['Suma todas las ventas', 'Cuenta los valores vacíos por columna', 'Elimina las filas vacías', 'Rellena los vacíos con cero'], 1, 'Es la forma rápida de saber cuántos nulos tiene cada columna.'],
+    ['¿Cómo filtras las filas donde ventas es mayor a 100?', ['<span class="data">df[df["ventas"] &gt; 100]</span>', '<span class="data">df.ventas(100)</span>', '<span class="data">df.filter(100)</span>', '<span class="data">df &gt; 100</span>'], 0, 'Se pasa una condición booleana dentro de los corchetes.'],
+    ['¿Qué hace <span class="data">df.groupby("categoria")["ventas"].sum()</span>?', ['Ordena por categoría', 'Suma las ventas de cada categoría', 'Cuenta las categorías', 'Elimina la columna ventas'], 1, 'Agrupa por categoría y suma la columna ventas en cada grupo.'],
+    ['El primer paso de un análisis exploratorio (EDA) es:', ['Entrenar un modelo', 'Entender qué datos tienes: columnas, tipos, nulos y rangos', 'Hacer el dashboard final', 'Presentar conclusiones'], 1, 'Antes de sacar conclusiones, revisa la calidad y la forma de los datos.'],
+    ['¿Qué gráfico usarías para ver la distribución de una variable numérica?', ['Histograma', 'Gráfico circular', 'Mapa', 'Tabla'], 0, 'El histograma muestra cómo se reparten los valores.'],
+    ['La IA te da código que funciona pero no lo entiendes. ¿Qué es lo más recomendable?', ['Usarlo igual', 'Pedirle que lo explique línea por línea y probarlo con datos pequeños', 'Borrarlo', 'Pedir otro código hasta que alguno funcione'], 1, 'Entender el código te permite detectar errores y defenderlo en una entrevista.'],
+    ['¿Qué NO deberías pegar en una IA pública al pedir ayuda con código?', ['Un error de Python', 'Un ejemplo de 5 filas inventadas', 'Una base con datos personales de clientes reales', 'El nombre de una función'], 2, 'Usa datos de ejemplo o anonimizados. Los datos personales reales no se comparten sin autorización.']
+  ],
+  task: { day: 'Días 19-20',
+    context: 'Un restaurante quiere entender las propinas que recibe: qué días, en qué turnos y con qué tamaño de mesa se dejan más propinas.',
+    data: ['Dataset "tips" de seaborn (propinas de un restaurante)', 'https://github.com/mwaskom/seaborn-data/blob/master/tips.csv', 'Datos · GitHub · sin registro'],
+    dataNote: 'Puedes cargarlo directamente en Python con <code>import seaborn as sns</code> y <code>df = sns.load_dataset("tips")</code>.',
+    steps: ['Carga el dataset y revisa con <code>head()</code>, <code>info()</code> y <code>describe()</code>.', 'Crea una columna <b>porcentaje de propina</b> (tip / total_bill * 100).', 'Calcula el porcentaje promedio de propina por día y por turno (<code>time</code>).', 'Haz 2 gráficos: un histograma del porcentaje de propina y un gráfico de barras por día.', 'Escribe 3 conclusiones y una recomendación para el restaurante.', '<b>Bonus con IA:</b> pide a una IA que revise tu código y anota qué mejoró.'],
+    criteria: ['Tu código corre de principio a fin sin errores.', 'Revisaste nulos y tipos de datos antes de analizar.', 'Tus gráficos tienen título y ejes con nombre.', 'Tus conclusiones se basan en los resultados, no en suposiciones.']
+  }
+},
+{
+  id: 5, title: 'Visualización y Power BI + IA', days: 22,
+  lead: 'Convierte datos en dashboards que ayudan a decidir: Power BI desde cero, DAX, diseño de reportes y el uso de la IA para acelerar el trabajo.',
+  goals: ['Importar, limpiar y modelar datos en Power BI.', 'Crear medidas con DAX para calcular indicadores.', 'Diseñar dashboards claros siguiendo principios de storytelling.', 'Usar la IA para acelerar la creación y revisión de reportes.'],
+  topics: [
+    { t: 'Power BI desde cero', d: 'Días 1-7', read: ['¿Qué es Power BI?', 'https://learn.microsoft.com/es-es/power-bi/fundamentals/power-bi-overview', '~6 min'], video: ['Curso de Power BI desde cero (completo): datos, gráficos y reporte profesional', YT('vufMFnWpINo'), 'may 2025 · 674 mil vistas · 2 h 2 min'], idea: 'Power BI Desktop es gratuito para crear reportes en tu computadora. Iniciar sesión solo es necesario para publicar y compartir en línea.' },
+    { t: 'Fórmulas DAX', d: 'Días 8-12', read: ['Aspectos básicos de DAX en Power BI Desktop', 'https://learn.microsoft.com/es-es/power-bi/transform-model/desktop-quickstart-learn-dax-basics', '~12 min'], video: ['Resuelve cualquier fórmula DAX con esta guía paso a paso', YT('Rl3fw4ZPO_M'), 'jun 2025 · 21 mil vistas · 36 min'], idea: 'Usa medidas (no columnas calculadas) para indicadores como ventas totales o margen: se recalculan según los filtros del reporte.' },
+    { t: 'Diseño de dashboards y storytelling', d: 'Días 13-15', read: ['Data storytelling: cómo contar historias con datos', 'https://datademia.es/blog/data-storytelling-como-contar-historias-con-datos', '~7 min'], video: ['Cómo crear un dashboard pro en Power BI paso a paso', YT('jH0tRqWu7BY'), 'jun 2025 · 87 mil vistas · 13 min'], idea: 'Ordena el dashboard como se lee: arriba los indicadores clave, al centro las tendencias y abajo el detalle.' },
+    { t: 'IA para Power BI', d: 'Días 16-17', read: ['Conectar Claude a Power BI con MCP', 'https://datademia.es/blog/conectar-claude-power-bi-mcp', '~8 min'], video: ['Claude hace solo lo que tardabas horas en Power BI', YT('NUW1GxPLpRA'), 'abr 2026 · 15 mil vistas · 10 min'], idea: 'La IA puede proponer medidas DAX y documentar tu modelo, pero tú decides si el indicador está bien definido para el negocio.' }
+  ],
+  ia: { prompts: ['Tengo un modelo con las tablas Ventas (Fecha, ProductoID, Cantidad, Precio) y Productos (ProductoID, Categoría). Escribe una medida DAX de ventas totales y otra de ventas del mismo periodo del año anterior. Explícalas.', 'Este es el diseño de mi dashboard: [describe]. ¿Qué cambiarías para que un gerente lo entienda en 10 segundos?', 'Explícame la diferencia entre una columna calculada y una medida con un ejemplo sencillo.'] },
+  quizDay: 'Día 18',
+  quiz: [
+    ['¿Qué componente de Power BI se usa para limpiar y transformar datos?', ['Power Query', 'DAX', 'El panel de visualizaciones', 'Power BI Service'], 0, 'Power BI usa el mismo Power Query que aprendiste en Excel.'],
+    ['En un modelo estrella, la tabla con las transacciones (por ejemplo, ventas) se llama:', ['Tabla de dimensión', 'Tabla de hechos', 'Tabla calculada', 'Tabla auxiliar'], 1, 'La tabla de hechos guarda los eventos medibles; las dimensiones describen productos, clientes o fechas.'],
+    ['¿Qué es una medida en Power BI?', ['Una columna fija en la tabla', 'Un cálculo DAX que responde a los filtros del reporte', 'Un tipo de gráfico', 'Un archivo de Excel'], 1, 'Las medidas se recalculan según el contexto de filtros.'],
+    ['¿Qué hace <span class="data">Ventas Totales = SUM(Ventas[Monto])</span>?', ['Cuenta las filas de ventas', 'Suma la columna Monto de la tabla Ventas', 'Calcula el promedio', 'Filtra las ventas'], 1, 'SUM suma todos los valores de una columna.'],
+    ['¿Qué función DAX permite cambiar el contexto de filtro de un cálculo?', ['CALCULATE', 'SUM', 'COUNT', 'FORMAT'], 0, 'CALCULATE es la función más importante de DAX: evalúa una expresión con filtros modificados.'],
+    ['¿Dónde conviene ubicar los indicadores clave en un dashboard?', ['Abajo a la derecha', 'Arriba, donde se mira primero', 'En una página aparte', 'Escondidos en un filtro'], 1, 'La lectura empieza arriba a la izquierda: ahí va lo más importante.'],
+    ['¿Qué es el storytelling con datos?', ['Inventar historias para adornar datos', 'Comunicar hallazgos con contexto, datos y visualizaciones para guiar una decisión', 'Usar muchos colores', 'Escribir textos largos'], 1, 'Combina datos, narrativa y visualización para que el mensaje se entienda y se actúe.'],
+    ['¿Para qué sirve un segmentador (slicer)?', ['Para filtrar el reporte de forma interactiva', 'Para borrar datos', 'Para crear tablas', 'Para exportar a PDF'], 0, 'Permite al usuario filtrar por periodo, región u otra categoría.'],
+    ['La IA te propone una medida DAX. ¿Cómo la validas?', ['Si no da error, está bien', 'Comparas su resultado con un total que ya conoces, por ejemplo en Excel', 'Le preguntas a la IA si está bien', 'No hace falta validarla'], 1, 'Valida siempre con un dato de control calculado por otro camino.'],
+    ['¿Qué necesitas para usar Power BI Desktop en tu computadora?', ['Una licencia de pago', 'Descargarlo gratis; la cuenta solo se pide para publicar en línea', 'Un servidor de base de datos', 'Saber programar en Python'], 1, 'Power BI Desktop es gratuito para crear reportes de forma local.']
+  ],
+  task: { day: 'Días 19-22',
+    context: 'Continúas con la empresa del Módulo 2. Ahora la gerencia quiere un dashboard interactivo en Power BI para revisarlo cada mes.',
+    data: ['Libro de Excel de ejemplo financiero (Financial Sample)', 'https://learn.microsoft.com/es-es/power-bi/create-reports/sample-financial-download', 'Datos · Microsoft · descarga sin registro'],
+    dataNote: 'Usa el mismo archivo del Módulo 2 e impórtalo en Power BI Desktop.',
+    steps: ['Importa y limpia los datos con Power Query.', 'Crea una <b>tabla de fechas</b> y relaciónala con la tabla de ventas.', 'Crea 4 medidas DAX: ventas totales, ganancia total, margen y ventas del año anterior.', 'Diseña un dashboard con indicadores arriba, tendencia al centro y detalle abajo, más un segmentador por país.', 'Agrega un cuadro de texto con 3 hallazgos clave.', '<b>Bonus con IA:</b> pide a una IA que revise el diseño y aplica solo las sugerencias que mejoren la lectura.'],
+    criteria: ['El modelo tiene una tabla de fechas relacionada.', 'Las 4 medidas dan resultados correctos (validados con Excel).', 'El dashboard se entiende en menos de 10 segundos.', 'Los hallazgos están escritos en lenguaje de negocio.']
+  }
+},
+{
+  id: 6, title: 'IA Generativa para analistas', days: 10,
+  lead: 'Entiende cómo funcionan los modelos de lenguaje y aprende a usarlos bien: prompts efectivos, Claude y la IA aplicada al análisis de datos.',
+  goals: ['Explicar en palabras simples cómo funciona un modelo de lenguaje (LLM).', 'Escribir prompts claros con contexto, tarea, formato y ejemplos.', 'Usar Claude para analizar archivos, resumir hallazgos y crear reportes.', 'Aplicar la IA a tareas reales de análisis sin perder el criterio propio.'],
+  topics: [
+    { t: 'Cómo funcionan los modelos de lenguaje', d: 'Días 1-2', read: ['¿Qué es un LLM (modelo de lenguaje de gran tamaño)?', 'https://aws.amazon.com/es/what-is/large-language-model/', '~10 min'], video: ['Cómo funcionan los LLMs', YT('awGfhmsN7Lc'), 'may 2025 · 279 mil vistas · 14 min'], idea: 'Un LLM predice el texto más probable a partir de lo que leyó en su entrenamiento. Por eso escribe con fluidez, pero puede afirmar cosas falsas con total seguridad.' },
+    { t: 'Ingeniería de prompts', d: 'Días 3-4', read: ['Cómo escribir prompts para análisis de datos', 'https://datademia.es/blog/como-escribir-prompts-para-analisis-de-datos', '~7 min'], video: ['Curso gratis de prompt engineering (2026)', YT('8Wqgr7Ry3dk'), 'oct 2025 · 292 mil vistas · 46 min'], idea: 'Un buen prompt tiene 4 partes: contexto (quién eres y qué datos tienes), tarea, formato de respuesta y un ejemplo.' },
+    { t: 'Claude desde cero', d: 'Días 5-6', read: ['Qué es Claude de Anthropic', 'https://datademia.es/blog/que-es-claude-de-anthropic', '~6 min'], video: ['Curso gratis: Claude para todos (2026)', YT('XE8umqpgKxg'), 'jun 2026 · 329 mil vistas · 31 min'], idea: 'Claude puede leer archivos que subes, como un CSV o un PDF, y responder preguntas sobre ellos. Siempre revisa sus cifras contra el archivo original.' },
+    { t: 'IA aplicada al análisis de datos', d: 'Días 7-8', read: ['Cómo usar Claude con Excel para analizar datos', 'https://datademia.es/blog/como-usar-claude-con-excel-para-analizar-datos', '~7 min'], video: ['Claude AI en Excel: tutorial paso a paso', YT('JzDS4vj62e8'), 'feb 2026 · 95 mil vistas · 23 min'], idea: 'La IA acelera la limpieza, las fórmulas y los primeros hallazgos. Tu valor como analista está en hacer la pregunta correcta y validar la respuesta.' }
+  ],
+  ia: { prompts: ['Actúa como analista de datos senior. Te paso 10 filas de ejemplo de mi tabla de ventas: [pega]. Propón 5 preguntas de negocio que podría responder con estos datos.', 'Reescribe este prompt para que sea más claro y específico: [pega tu prompt]', 'Resume estos hallazgos para un gerente en 5 viñetas, en lenguaje sencillo y con una recomendación final: [pega tus hallazgos]'], note: 'Claude y ChatGPT tienen planes gratuitos, pero piden crear una cuenta para usarlos.' },
+  quizDay: 'Día 9',
+  quiz: [
+    ['¿Qué hace, en esencia, un modelo de lenguaje (LLM)?', ['Busca la respuesta exacta en internet', 'Predice el texto más probable según lo aprendido en su entrenamiento', 'Ejecuta consultas SQL', 'Copia respuestas de una base fija'], 1, 'Genera texto prediciendo palabra a palabra. Por eso puede equivocarse con seguridad.'],
+    ['¿Qué es una "alucinación" de la IA?', ['Un error de conexión', 'Una respuesta inventada o falsa presentada como cierta', 'Una imagen generada', 'Un prompt mal escrito'], 1, 'La IA puede inventar datos, cifras o citas que suenan creíbles.'],
+    ['¿Cuál de estos prompts es mejor?', ['"Analiza esto"', '"Eres analista de retail. Con esta tabla de ventas (columnas: fecha, tienda, monto), dame las 3 tiendas con mayor caída mensual en una tabla."', '"Haz un análisis bueno"', '"Dime algo de ventas"'], 1, 'Incluye rol, contexto de los datos, tarea concreta y formato de salida.'],
+    ['Dar un ejemplo de la respuesta que esperas en el prompt se llama:', ['Few-shot (con ejemplos)', 'Zero-click', 'Fine-tuning', 'Hard coding'], 0, 'Los ejemplos ayudan a la IA a imitar el formato y el nivel de detalle.'],
+    ['Si la respuesta de la IA no te sirve, lo mejor es:', ['Abandonar la herramienta', 'Iterar: aclarar el contexto, pedir otro formato o dividir la tarea', 'Repetir el mismo prompt muchas veces', 'Escribir en mayúsculas'], 1, 'Trabajar con IA es un proceso iterativo de refinar instrucciones.'],
+    ['¿Qué puede hacer Claude con un archivo CSV que le subes?', ['Nada, solo lee texto', 'Leerlo, analizarlo y responder preguntas sobre los datos', 'Modificar tu base de datos original', 'Publicarlo en internet'], 1, 'Puede analizar el archivo, pero debes verificar las cifras que te da.'],
+    ['¿Cuál es el papel del analista cuando usa IA?', ['Copiar y pegar respuestas', 'Formular buenas preguntas, aportar contexto y validar los resultados', 'Ninguno, la IA lo hace todo', 'Solo revisar la ortografía'], 1, 'El criterio y la validación siguen siendo responsabilidad del analista.'],
+    ['Antes de subir un archivo de tu empresa a una IA, debes:', ['Subirlo sin pensar', 'Revisar si contiene datos confidenciales y si tu empresa lo permite', 'Cambiarle el nombre', 'Comprimirlo'], 1, 'Muchas empresas tienen políticas sobre qué datos pueden usarse con IA.'],
+    ['La IA te dice que las ventas crecieron 35%, pero en tu tabla calculas 25%. ¿Qué haces?', ['Usas el 35% porque lo dijo la IA', 'Revisas el cálculo, identificas el error y usas el dato verificado', 'Promedias ambos', 'No reportas nada'], 1, 'Ante una diferencia, manda el dato verificado en la fuente.'],
+    ['¿Qué parte de un prompt indica cómo quieres la respuesta (tabla, viñetas, longitud)?', ['El contexto', 'El formato', 'El rol', 'El saludo'], 1, 'Especificar el formato ahorra rehacer la respuesta.']
+  ],
+  task: { day: 'Día 10',
+    context: 'Tu jefe quiere saber si la IA puede ayudar al equipo. Te pide probarla con el análisis que hiciste en el Módulo 4 (propinas del restaurante).',
+    data: ['Dataset "tips" de seaborn (propinas de un restaurante)', 'https://github.com/mwaskom/seaborn-data/blob/master/tips.csv', 'Datos · GitHub · sin registro'],
+    dataNote: 'Usa el archivo CSV del Módulo 4. Es un dataset público, sin datos personales.',
+    steps: ['Escribe un <b>prompt</b> con contexto, tarea, formato y un ejemplo para pedirle a Claude un análisis del dataset.', 'Sube el CSV a Claude y pídele 5 hallazgos y un gráfico sugerido.', 'Compara sus hallazgos con los tuyos del Módulo 4: ¿en qué coinciden y en qué no?', 'Verifica al menos 2 cifras de la IA con tu propio cálculo en Python o Excel.', 'Escribe un informe de media página: qué hizo bien la IA, qué errores encontraste y cómo la usarías en tu trabajo.'],
+    criteria: ['Tu prompt tiene contexto, tarea, formato y ejemplo.', 'Verificaste al menos 2 cifras de la IA.', 'Identificaste al menos un error o limitación de la IA.', 'Tu informe termina con una recomendación concreta.']
+  }
+},
+{
+  id: 7, title: 'Automatización y agentes de IA', days: 10,
+  lead: 'Lo que viene para el analista: agentes de IA que consultan datos y generan reportes, y flujos automáticos que trabajan por ti.',
+  goals: ['Explicar qué es un agente de IA y en qué se diferencia de un chatbot.', 'Crear flujos de automatización sin código con n8n.', 'Entender cómo un agente puede conectarse a una base de datos para responder preguntas.', 'Identificar qué tareas de tu trabajo conviene automatizar y cuáles no.'],
+  topics: [
+    { t: 'Qué son los agentes de IA', d: 'Días 1-2', read: ['¿Qué son los agentes de IA?', 'https://www.ibm.com/es-es/think/topics/ai-agents', '~10 min'], video: ['Te explico los agentes de IA en 20 minutos', YT('BN8nmj5EiGc'), 'sep 2026 · 361 mil vistas · 28 min'], idea: 'Un chatbot responde; un agente decide pasos y usa herramientas (buscar, consultar una base, enviar un correo) para cumplir un objetivo.' },
+    { t: 'Automatización sin código con n8n', d: 'Días 3-5', read: ['Qué es n8n y qué flujos de trabajo puedes hacer', 'https://www.xataka.com/basics/que-n8n-que-flujos-trabajo-puedes-hacer-conectando-aplicaciones-esta-plataforma-cual-su-precio', '~7 min'], video: ['Introducción a n8n: automatiza tus flujos de trabajo', YT('yP0PM-fpnXo'), 'nov 2025 · 201 mil vistas · 24 min'], idea: 'Todo flujo tiene un disparador (cuándo empieza), pasos (qué hace) y un resultado (dónde deja la información).' },
+    { t: 'Agentes que consultan datos', d: 'Días 6-7', read: ['MCP: qué es y cómo funciona el estándar que conecta la IA con otras herramientas', 'https://www.xataka.com/basics/mcp-model-context-protocol-que-como-funciona-este-estandar-que-permite-funcionamiento-agentes-inteligencia-artificial', '~8 min'], video: ['La clave del agente SQL: conecta la IA a tu base de datos en n8n', YT('qH0Wsn1SY3U'), 'may 2025 · 35 mil vistas · 31 min'], idea: 'Un agente SQL traduce una pregunta en lenguaje natural a una consulta. Si no conoces SQL, no podrás saber si la consulta es correcta.' },
+    { t: 'El nuevo analista de datos con IA', d: 'Día 8', read: ['Rol del analista de datos en 2026: funciones y futuro', 'https://datademia.es/blog/rol-analista-datos-2026', '~7 min'], video: ['Así trabaja el nuevo analista de datos con IA', YT('JzzbiFppddQ'), 'oct 2026 · 28 mil vistas · 8 min'], idea: 'Automatiza lo repetitivo (descargar, limpiar, actualizar) y dedica tu tiempo a lo que requiere criterio: interpretar y recomendar.' }
+  ],
+  ia: { prompts: ['Describo mi tarea semanal: [describe tu proceso de reporte]. ¿Qué pasos se podrían automatizar con n8n y cuáles conviene dejar manuales? Dame un diagrama en texto.', 'Explícame con un ejemplo de ventas qué haría un agente de IA conectado a una base de datos y qué riesgos tiene.', 'Diseña un flujo de n8n que cada lunes lea un CSV de ventas, calcule el total semanal y envíe un resumen por correo. Lista los nodos que necesito.'], note: 'n8n se puede instalar gratis en tu computadora. Su versión en la nube pide crear una cuenta.' },
+  quizDay: 'Día 9',
+  quiz: [
+    ['¿Qué diferencia a un agente de IA de un chatbot?', ['El agente solo responde preguntas', 'El agente puede planificar pasos y usar herramientas para cumplir un objetivo', 'No hay diferencia', 'El chatbot es más moderno'], 1, 'Los agentes actúan: consultan datos, llaman a otras aplicaciones y encadenan pasos.'],
+    ['En n8n, el nodo que inicia un flujo se llama:', ['Disparador (trigger)', 'Salida', 'Filtro', 'Variable'], 0, 'El disparador puede ser un horario, un formulario, un correo o un webhook.'],
+    ['¿Cuál de estas tareas es buena candidata para automatizar?', ['Decidir la estrategia comercial del año', 'Descargar y consolidar el mismo reporte todos los lunes', 'Negociar con un cliente', 'Definir los KPIs de la empresa'], 1, 'Las tareas repetitivas con reglas claras son las mejores para automatizar.'],
+    ['¿Qué es MCP (Model Context Protocol)?', ['Un lenguaje de programación', 'Un estándar para conectar modelos de IA con herramientas y fuentes de datos', 'Un tipo de gráfico', 'Una base de datos'], 1, 'Funciona como un conector común entre la IA y otras aplicaciones.'],
+    ['Un agente SQL convierte una pregunta en una consulta. ¿Cuál es el principal riesgo?', ['Que sea demasiado rápido', 'Que genere una consulta incorrecta y nadie lo note', 'Que use mayúsculas', 'Ninguno'], 1, 'Por eso el analista necesita saber SQL para revisar lo que el agente ejecuta.'],
+    ['¿Qué permiso es más seguro darle a un agente que consulta una base de datos?', ['Permiso para borrar tablas', 'Solo lectura', 'Acceso de administrador', 'Acceso a todas las bases de la empresa'], 1, 'El principio de mínimo privilegio reduce el daño de un error.'],
+    ['En un flujo automatizado, ¿por qué conviene un paso de revisión humana antes de enviar un reporte a gerencia?', ['Para hacerlo más lento', 'Para detectar errores antes de que lleguen a quien decide', 'No conviene', 'Para cambiar los colores'], 1, 'La revisión humana es clave cuando el resultado impacta decisiones.'],
+    ['Según el video y la lectura, ¿en qué debería enfocar su tiempo el analista con IA?', ['En copiar datos entre archivos', 'En interpretar resultados y recomendar acciones', 'En formatear celdas', 'En descargar reportes'], 1, 'La IA libera tiempo de tareas repetitivas para el análisis con criterio.'],
+    ['¿Qué necesita un flujo de n8n para enviar un correo automático?', ['Un nodo de correo con una cuenta configurada', 'Una tabla dinámica', 'Una medida DAX', 'Nada'], 0, 'Cada servicio externo requiere su nodo y su conexión.'],
+    ['Un agente te entrega un reporte con una cifra extraña. ¿Qué haces?', ['Lo reenvías igual', 'Revisas los pasos que siguió el agente y validas la cifra en la fuente', 'Borras el agente', 'Cambias la cifra a mano sin investigar'], 1, 'Revisa el registro de pasos y la fuente de datos antes de usar el resultado.']
+  ],
+  task: { day: 'Día 10',
+    context: 'Cada lunes preparas a mano el mismo reporte de ventas. Tu jefe te pide una propuesta para automatizarlo con IA.',
+    steps: ['Describe el proceso actual paso a paso y cuánto tiempo toma.', 'Marca qué pasos se pueden automatizar y cuáles necesitan revisión humana.', 'Diseña el flujo en n8n (o en un diagrama si aún no lo instalas): disparador, pasos y salida.', 'Define qué permisos necesita y qué datos <b>no</b> debe tocar.', 'Opcional: construye el flujo en n8n con un CSV de prueba.', '<b>Bonus con IA:</b> pide a una IA que critique tu diseño y busque puntos de falla.'],
+    criteria: ['El diagrama muestra disparador, pasos y salida.', 'Incluiste al menos un paso de revisión humana.', 'Definiste permisos de solo lectura donde corresponde.', 'Estimaste el tiempo que se ahorraría.']
+  }
+},
+{
+  id: 8, title: 'Calidad, ética y gobierno de la IA', days: 6,
+  lead: 'La habilidad que más diferencia a un IA Data Analyst: saber cuándo confiar en la IA, detectar sesgos y proteger los datos de las personas.',
+  goals: ['Reconocer alucinaciones y validar respuestas de la IA.', 'Identificar sesgos en datos y modelos y sus consecuencias.', 'Aplicar buenas prácticas de privacidad al usar herramientas de IA.'],
+  topics: [
+    { t: 'Alucinaciones y validación', d: 'Día 1', read: ['¿Qué son las alucinaciones de IA?', 'https://www.ibm.com/es-es/think/topics/ai-hallucinations', '~10 min'], video: ['Por qué nadie consigue arreglar el gran fallo de la IA', YT('UqKhMMqCo_E'), 'mar 2026 · 396 mil vistas · 28 min'], idea: 'Regla práctica: toda cifra que vaya a un reporte debe poder rastrearse hasta una fuente de datos verificada.' },
+    { t: 'Sesgos en los datos y en la IA', d: 'Día 2', read: ['Ejemplos de sesgos de IA', 'https://www.ibm.com/es-es/think/topics/shedding-light-on-ai-bias-with-real-world-examples', '~10 min'], novideo: 'No encontramos un video en español de 2025 en adelante con más de 10 mil vistas y comentarios que respalden su utilidad. Por ahora este tema se estudia con la lectura.', idea: 'Si los datos de entrenamiento reflejan desigualdades del pasado, el modelo las repite. Revisa siempre a quién representa (y a quién no) tu muestra.' },
+    { t: 'Privacidad y uso responsable', d: 'Día 3', read: ['Explorar los problemas de privacidad en la era de la IA', 'https://www.ibm.com/es-es/think/insights/ai-privacy', '~10 min'], video: ['Cuando uses herramientas de IA: protege tu privacidad', YT('eTSLhFCLnu8'), 'ago 2025 · 40 mil vistas · 4 min'], idea: 'Antes de pegar datos en una IA, pregúntate: ¿hay nombres, documentos, correos o datos financieros? Si los hay, anonimiza o no los uses.' }
+  ],
+  ia: { prompts: ['Te paso una respuesta que me dio una IA: [pega]. Señala qué afirmaciones necesitan verificación y cómo las verificaría.', 'Tengo una base de clientes con nombre, DNI, correo y compras. ¿Qué columnas debo eliminar o anonimizar antes de analizarla con IA y cómo?', 'Dame 3 ejemplos de sesgo que podrían aparecer en un modelo que decide a quién dar un crédito.'] },
+  quizDay: 'Día 4',
+  quiz: [
+    ['Una alucinación de IA es más peligrosa cuando:', ['La respuesta suena segura y nadie la verifica', 'La respuesta es corta', 'Se usa en inglés', 'La IA dice que no sabe'], 0, 'El riesgo está en aceptar sin verificar una respuesta convincente.'],
+    ['¿Cuál es la mejor forma de validar una cifra que te dio la IA?', ['Preguntarle a la misma IA si está segura', 'Calcularla o buscarla en la fuente original de datos', 'Buscar si otra IA dice lo mismo', 'Redondearla'], 1, 'La validación se hace contra la fuente, no contra otra respuesta generada.'],
+    ['Un modelo de selección de personal aprende de contrataciones pasadas donde casi todos eran hombres. ¿Qué riesgo hay?', ['Ninguno', 'Que repita ese sesgo y desfavorezca a las mujeres', 'Que sea más lento', 'Que use más memoria'], 1, 'Los modelos reproducen los patrones, también los injustos, de sus datos.'],
+    ['¿Qué es el sesgo de muestra?', ['Cuando los datos no representan bien a la población que quieres analizar', 'Un error de ortografía', 'Un tipo de gráfico', 'Una función de Excel'], 0, 'Si solo encuestas a clientes satisfechos, tus conclusiones no aplican a todos.'],
+    ['¿Cuál de estos datos es personal y sensible?', ['Total de ventas del mes', 'Número de documento de identidad de un cliente', 'Nombre de una categoría de producto', 'Temperatura promedio'], 1, 'Los documentos de identidad permiten identificar a una persona.'],
+    ['Anonimizar datos significa:', ['Borrarlos todos', 'Quitar o reemplazar la información que identifica a las personas', 'Cambiarles el formato', 'Ordenarlos alfabéticamente'], 1, 'Por ejemplo, reemplazar nombres por códigos y eliminar documentos o correos.'],
+    ['Tu empresa no tiene política sobre uso de IA. ¿Qué haces antes de usarla con datos internos?', ['Usarla libremente', 'Consultar con tu jefe o el área responsable', 'Usar tu cuenta personal a escondidas', 'Publicar los datos'], 1, 'Ante la duda, pregunta: el uso de datos internos debe estar autorizado.'],
+    ['¿Qué práctica reduce el riesgo de errores al usar IA en reportes?', ['Revisión humana de las cifras clave', 'Usar siempre la respuesta más larga', 'Pedir que escriba más rápido', 'Evitar documentar el proceso'], 0, 'Un control humano en los puntos críticos evita que un error llegue a una decisión.'],
+    ['Documentar qué parte de un análisis hizo la IA sirve para:', ['Nada', 'Dar transparencia y permitir que otros revisen el trabajo', 'Hacer más largo el informe', 'Ocultar errores'], 1, 'La transparencia genera confianza y facilita auditar el trabajo.'],
+    ['¿Cuál es una buena señal de que una respuesta de IA necesita verificación extra?', ['Incluye cifras exactas, fechas o citas', 'Es amable', 'Está bien escrita', 'Usa viñetas'], 0, 'Las cifras, fechas y citas son donde más se inventa información.']
+  ],
+  task: { day: 'Días 5-6',
+    context: 'Tu equipo quiere usar IA en sus reportes. Te piden una guía corta de buenas prácticas basada en una prueba real.',
+    steps: ['Pide a una IA 5 datos sobre un tema que conozcas bien (por ejemplo, tu país o tu industria) con cifras y fuentes.', 'Verifica cada dato en una fuente confiable y marca cuáles eran correctos, imprecisos o inventados.', 'Toma una tabla de ejemplo con datos personales inventados (nombre, DNI, correo, compras) y anonimízala.', 'Escribe una guía de 1 página con 5 reglas para usar IA en tu equipo.', '<b>Bonus:</b> incluye un ejemplo de sesgo que podría afectar a un análisis de tu industria.'],
+    criteria: ['Verificaste los 5 datos con fuentes confiables.', 'Tu tabla anonimizada no permite identificar a nadie.', 'Tu guía tiene 5 reglas claras y aplicables.', 'Incluiste al menos una regla sobre revisión humana.']
+  }
+},
+{
+  id: 9, title: 'Comunicación y negocio', days: 6,
+  lead: 'Un análisis solo genera valor si alguien lo entiende y actúa. Aprende a contar historias con datos, pensar como el negocio y mostrar tu trabajo.',
+  goals: ['Estructurar una presentación de hallazgos con inicio, nudo y desenlace.', 'Traducir resultados técnicos a lenguaje de negocio.', 'Preparar un portafolio que demuestre tus habilidades.'],
+  topics: [
+    { t: 'Storytelling: contar historias con datos', d: 'Días 1-2', read: ['Data storytelling: cómo comunicar con datos de forma efectiva', 'https://datademia.es/blog/data-storytelling-como-comunicar-con-datos-de-forma-efectiva', '~7 min'], video: ['Expertos en storytelling: 7 trucos narrativos para contar historias', YT('tp0a_gLfgyw'), 'nov 2025 · 344 mil vistas · 1 h 51 min'], idea: 'Empieza por la conclusión: "Las ventas cayeron 12% por la región Sur". Luego muestra la evidencia y cierra con lo que propones hacer.' },
+    { t: 'Pensar como el negocio', d: 'Día 3', read: ['El lado oscuro del análisis de datos: 8 cosas que nadie te cuenta', 'https://datademia.es/blog/el-lado-oscuro-del-analisis-de-datos-8-cosas-que-nadie-te-cuenta-antes-de-convertirte-en-analista-de-datos', '~8 min'], video: ['Pensar como un analista de datos', YT('2uVLRvBoW34'), 'may 2025 · 44 mil vistas · 22 min'], idea: 'Antes de analizar, pregunta: ¿qué decisión se va a tomar con esto? La respuesta define qué datos necesitas y cómo presentarlos.' },
+    { t: 'Portafolio y empleabilidad', d: 'Día 4', read: ['¿Cómo crear un portfolio para conseguir trabajo como analista de datos?', 'https://datademia.es/blog/como-crear-un-portfolio-para-conseguir-trabajo-como-analista-o-cientifico-de-datos', '~8 min'], video: ['El único portfolio de análisis de datos que necesitas', YT('DZLVKVIFWzU'), 'dic 2025 · 19 mil vistas · 7 min'], idea: 'Un buen proyecto de portafolio explica el problema de negocio, el proceso y la recomendación, no solo el código o el dashboard.' }
+  ],
+  ia: { prompts: ['Estos son mis hallazgos: [pega]. Reescríbelos como un mensaje de 5 líneas para un gerente que no conoce de datos.', 'Actúa como reclutador de analistas de datos. Revisa la descripción de mi proyecto de portafolio y dime qué le falta: [pega]', 'Prepárame 5 preguntas difíciles que un gerente podría hacer sobre este análisis y cómo responderlas: [describe tu análisis]'] },
+  quizDay: 'Día 5',
+  quiz: [
+    ['¿Cómo conviene empezar una presentación de hallazgos para gerencia?', ['Con la metodología detallada', 'Con la conclusión principal', 'Con la lista de todas las tablas', 'Con la historia de la empresa'], 1, 'Los directivos tienen poco tiempo: primero el mensaje, luego la evidencia.'],
+    ['¿Qué tres elementos combina el data storytelling?', ['Datos, narrativa y visualización', 'Excel, SQL y Python', 'Colores, fuentes e íconos', 'Inicio, fin y anexos'], 0, 'Juntos hacen que el mensaje se entienda y se recuerde.'],
+    ['¿Cuál es una frase en lenguaje de negocio?', ['"El coeficiente de correlación es 0.72"', '"Los clientes que reciben el correo de bienvenida compran 2 veces más en su primer mes"', '"Usé un LEFT JOIN"', '"La desviación estándar es alta"'], 1, 'Explica el hallazgo en términos de clientes y resultados, no de técnicas.'],
+    ['Antes de empezar un análisis, la pregunta más importante es:', ['¿Qué herramienta uso?', '¿Qué decisión se va a tomar con este análisis?', '¿Qué color tendrá el dashboard?', '¿Cuántas filas tiene la base?'], 1, 'La decisión define el alcance, los datos y el formato de entrega.'],
+    ['Un gerente pide "un reporte de todo". ¿Qué haces?', ['Le envías todas las tablas', 'Le preguntas qué decisión necesita tomar y acuerdas el alcance', 'Lo ignoras', 'Haces 50 gráficos'], 1, 'Aclarar el objetivo evita trabajo inútil y entrega algo que sí sirve.'],
+    ['¿Qué debe incluir un proyecto de portafolio?', ['Solo el código', 'Problema, datos, proceso, resultados y recomendación', 'Solo capturas de pantalla', 'Tu CV completo'], 1, 'Así el reclutador entiende cómo piensas, no solo qué herramienta usas.'],
+    ['¿Dónde conviene publicar tu portafolio de analista?', ['En un repositorio de GitHub y compartirlo en LinkedIn', 'Solo en tu computadora', 'En una memoria USB', 'En un correo a ti mismo'], 0, 'GitHub permite mostrar archivos y documentación; LinkedIn le da visibilidad.'],
+    ['Un hallazgo sin recomendación es:', ['Un análisis completo', 'Un análisis incompleto: falta decir qué hacer', 'Mejor, porque es neutral', 'Un error de cálculo'], 1, 'El valor del analista está en conectar el dato con una acción.'],
+    ['¿Qué habilidad blanda es clave para un analista?', ['Hablar con términos técnicos para impresionar', 'Escuchar al negocio y explicar con claridad', 'Trabajar siempre solo', 'Evitar preguntas'], 1, 'Comunicación y escucha son tan importantes como la técnica.'],
+    ['Usas IA para redactar tu presentación. ¿Qué debes revisar?', ['Nada', 'Que las cifras y conclusiones coincidan con tu análisis', 'Solo el tamaño de la letra', 'Que sea más larga'], 1, 'La IA puede cambiar cifras o exagerar conclusiones al redactar.']
+  ],
+  task: { day: 'Día 6',
+    context: 'Debes presentar a gerencia los resultados del dashboard que hiciste en el Módulo 5. Tienes 5 minutos.',
+    steps: ['Escribe la conclusión principal en una sola frase.', 'Elige 3 evidencias (cifras o gráficos) que la respalden.', 'Prepara 4 diapositivas: conclusión, evidencias, recomendación y próximos pasos.', 'Grábate presentando en 5 minutos (con el celular basta) y mírate una vez.', 'Escribe la descripción de este proyecto para tu portafolio: problema, proceso, resultado y recomendación.', '<b>Bonus con IA:</b> pide a una IA que haga de gerente exigente y te haga 5 preguntas.'],
+    criteria: ['La primera diapositiva dice la conclusión.', 'Cada evidencia tiene una cifra concreta.', 'La recomendación es una acción clara.', 'Tu presentación dura 5 minutos o menos.']
+  }
+},
+{
+  id: 10, title: 'Proyecto final con IA', days: 10,
+  lead: 'Demuestra todo lo aprendido con un proyecto de punta a punta: datos reales, SQL, Python, Power BI e IA, documentado y publicado en GitHub.',
+  goals: ['Planificar un proyecto de análisis a partir de preguntas de negocio.', 'Aplicar SQL, Python y Power BI en un mismo flujo de trabajo.', 'Documentar cómo usaste la IA y cómo validaste sus resultados.', 'Publicar el proyecto en GitHub y compartirlo en LinkedIn.'],
+  topics: [
+    { t: 'Cómo crear un proyecto de análisis de datos', d: 'Días 1-2', read: ['Cuatro datasets y proyectos para iniciar tu camino en la ciencia de datos', 'https://datademia.es/blog/cuatro-datasets-y-proyectos-para-iniciar-tu-camino-en-la-ciencia-de-datos', '~6 min'], video: ['Cómo crear un proyecto de análisis de datos desde 0 (curso completo)', YT('o9t3jIxe8TA'), 'sep 2026 · 16 mil vistas · 1 h 27 min'], idea: 'Un proyecto de portafolio no necesita ser enorme: necesita una pregunta clara, un proceso ordenado y una recomendación bien sustentada.' },
+    { t: 'Git y GitHub para tu portafolio', d: 'Día 3', read: ['Hola mundo: primeros pasos en GitHub', 'https://docs.github.com/es/get-started/using-github/hello-world', '~10 min'], video: ['Te enseño Git y GitHub desde 0 en 15 minutos', YT('H2h_ew9dc_0'), 'feb 2025 · 126 mil vistas · 18 min'], idea: 'El archivo README es la portada de tu proyecto: es lo primero (y a veces lo único) que leerá un reclutador.' }
+  ],
+  ia: { prompts: ['Quiero hacer un proyecto de portafolio de analista de datos sobre [tema]. Propón 3 preguntas de negocio y qué datos públicos podría usar.', 'Revisa la estructura de mi README y dime qué secciones faltan: [pega]', 'Explícame los pasos para subir mi proyecto a GitHub por primera vez, sin usar la terminal.'], note: 'Publicar en GitHub y LinkedIn requiere una cuenta gratuita en cada servicio.' },
+  quizDay: 'Día 4',
+  quiz: [
+    ['¿Cuál es el primer paso de un proyecto de análisis?', ['Elegir los colores del dashboard', 'Definir el problema y las preguntas de negocio', 'Escribir el código', 'Publicar en LinkedIn'], 1, 'Sin una pregunta clara, el análisis no tiene dirección.'],
+    ['¿Qué es un repositorio en GitHub?', ['Una carpeta de proyecto con su historial de cambios', 'Un tipo de base de datos', 'Una red social', 'Un lenguaje de programación'], 0, 'Guarda archivos y el historial de versiones de tu proyecto.'],
+    ['¿Para qué sirve el archivo README?', ['Para guardar contraseñas', 'Para explicar de qué trata el proyecto y cómo usarlo', 'Para ejecutar el código', 'Para borrar archivos'], 1, 'Es la portada y la guía del proyecto.'],
+    ['En Git, un "commit" es:', ['Una copia guardada de los cambios con un mensaje que los describe', 'Un error', 'Un tipo de gráfico', 'Un archivo de Excel'], 0, 'Cada commit registra qué cambió y por qué.'],
+    ['¿Qué orden sigue un buen flujo de proyecto?', ['Dashboard → preguntas → datos', 'Preguntas → datos → limpieza → análisis → visualización → recomendación', 'Código → publicación → preguntas', 'Recomendación → datos → preguntas'], 1, 'Primero se define qué se quiere saber y al final se recomienda qué hacer.'],
+    ['¿Qué datos conviene usar en un proyecto público?', ['Datos de clientes de tu empresa', 'Datos públicos o anonimizados', 'Datos personales de amigos', 'Datos sin fuente'], 1, 'Usa fuentes abiertas como datos abiertos del gobierno o el Banco Mundial.'],
+    ['¿Por qué documentar el uso de IA en tu proyecto?', ['Para demostrar que sabes usarla con criterio y validar sus resultados', 'Para ocultar tu trabajo', 'No es necesario', 'Para hacerlo más largo'], 0, 'Es justo lo que buscan las empresas en un IA Data Analyst.'],
+    ['Un reclutador revisa tu proyecto 2 minutos. ¿Qué debe ver primero?', ['El código completo', 'Un resumen con el problema, los hallazgos y una imagen del dashboard', 'La lista de librerías', 'Tus notas personales'], 1, 'Un buen resumen visual capta la atención en segundos.'],
+    ['¿Qué incluir en la publicación de LinkedIn sobre tu proyecto?', ['Solo el enlace', 'El problema, 2 o 3 hallazgos, una imagen y el enlace al repositorio', 'Tu CV completo', 'Nada, basta con GitHub'], 1, 'Cuenta brevemente qué descubriste y por qué importa.'],
+    ['¿Qué demuestra mejor tu nivel en una entrevista?', ['Haber visto muchos cursos', 'Explicar un proyecto propio de punta a punta, incluidas sus limitaciones', 'Tener muchos certificados', 'Conocer muchos atajos de teclado'], 1, 'Explicar tus decisiones y limitaciones muestra criterio profesional.']
+  ],
+  task: { day: 'Días 5-10',
+    context: 'Tu proyecto final de portafolio. Elige un tema que te interese y analízalo de punta a punta con todo lo aprendido en la ruta.',
+    data: ['Plataforma Nacional de Datos Abiertos del Perú', 'https://www.datosabiertos.gob.pe/', 'Datos · también Banco Mundial o Gapminder · sin registro'],
+    dataNote: 'Si no eres de Perú, busca el portal de datos abiertos de tu país. También sirven <b>data.worldbank.org</b> y <b>gapminder.org/data</b>.',
+    steps: ['<b>Día 5:</b> define el problema y 3 preguntas de negocio. Elige y descarga tus datos.', '<b>Días 6-7:</b> carga los datos en una base SQLite y responde preliminarmente con <b>SQL</b>. Limpia y explora con <b>Python + pandas</b>.', '<b>Días 8-9:</b> construye un dashboard en <b>Power BI</b> que responda tus 3 preguntas.', '<b>Día 9:</b> documenta en una sección "Uso de IA" qué le pediste a la IA, qué aceptaste, qué corregiste y cómo validaste.', '<b>Día 10:</b> sube todo a <b>GitHub</b> con un README (problema, datos, proceso, hallazgos, recomendación) y publica un post en <b>LinkedIn</b>.'],
+    criteria: ['El README explica problema, datos, proceso, hallazgos y recomendación.', 'Usaste SQL, Python y Power BI en el proyecto.', 'La sección "Uso de IA" explica cómo validaste los resultados.', 'Publicaste el proyecto en GitHub y lo compartiste en LinkedIn.']
+  }
+}
+];
+
+
+const SQL_SCRIPT = `CREATE TABLE clientes (id INTEGER PRIMARY KEY, nombre TEXT, ciudad TEXT);
+CREATE TABLE productos (id INTEGER PRIMARY KEY, nombre TEXT, categoria TEXT, precio REAL);
+CREATE TABLE ventas (id INTEGER PRIMARY KEY, fecha TEXT, cliente_id INTEGER, producto_id INTEGER, cantidad INTEGER);
+INSERT INTO clientes VALUES (1,'Ana Torres','Lima'),(2,'Luis Paredes','Arequipa'),(3,'María Quispe','Lima'),(4,'Jorge Salas','Trujillo'),(5,'Rosa Huamán','Cusco'),(6,'Pedro Díaz','Arequipa'),(7,'Lucía Ramos','Lima'),(8,'Carlos Vega','Piura');
+INSERT INTO productos VALUES (1,'Café 250g','Bebidas',18.5),(2,'Té verde','Bebidas',9.9),(3,'Galletas avena','Snacks',6.5),(4,'Chocolate 70%','Snacks',12.0),(5,'Granola 500g','Desayuno',22.0),(6,'Miel 300g','Desayuno',16.0);
+INSERT INTO ventas VALUES (1,'2026-01-05',1,1,2),(2,'2026-01-07',2,3,5),(3,'2026-01-12',3,5,1),(4,'2026-01-15',1,4,3),(5,'2026-01-20',4,2,4),(6,'2026-02-02',5,1,1),(7,'2026-02-04',2,6,2),(8,'2026-02-10',3,3,6),(9,'2026-02-14',6,4,2),(10,'2026-02-18',1,5,2),(11,'2026-02-25',4,1,3),(12,'2026-03-03',2,1,4),(13,'2026-03-08',5,6,1),(14,'2026-03-12',3,2,2),(15,'2026-03-19',6,5,3),(16,'2026-03-27',1,3,8);`;
+
+const ICON_READ = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H4z"/><path d="M20 5h-4a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h5z"/></svg>';
+const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>';
+const ICON_DATA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg>';
+const TICK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>';
+const CROSS = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
+const L = ['a', 'b', 'c', 'd'];
+const TOTAL_DAYS = MODULES.reduce((s, m) => s + m.days, 0);
+
+// Progreso guardado en el navegador de cada persona
+const KEY = 'ruta-ia-data-analyst-2027';
+let store = {};
+try { store = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
+const modState = id => (store[id] = store[id] || { done: {}, crit: {} });
+const parts = m => [...m.topics.map((_, i) => 'tema-' + (i + 1)), 'ia', 'cuestionario', 'tarea'];
+const modProgress = m => { const s = modState(m.id); const p = parts(m); return { n: p.filter(x => s.done[x]).length, total: p.length }; };
+
+const app = document.getElementById('app');
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+function resCard(kind, title, url, metaText) {
+  const icon = kind === 'video' ? ICON_PLAY : kind === 'data' ? ICON_DATA : ICON_READ;
+  return `<a class="res" href="${url}" target="_blank" rel="noopener"><span class="res-icon ${kind === 'video' ? 'video' : ''}" aria-hidden="true">${icon}</span><span class="res-body"><span class="res-type">${metaText}</span><span class="res-title">${title}</span></span><span class="res-go" aria-hidden="true">↗</span></a>`;
+}
+const checkBtn = (part, label) => `<button class="check" type="button" data-check="${part}" aria-pressed="false"><span class="box">${TICK}</span><span class="lbl">${label}</span></button>`;
+
+/* ---------- Vista Ruta ---------- */
+function renderOverview() {
+  const totalParts = MODULES.reduce((s, m) => s + parts(m).length, 0);
+  const doneParts = MODULES.reduce((s, m) => s + modProgress(m).n, 0);
+  app.innerHTML = `
+  <header class="hero"><div class="wrap">
+    <span class="eyebrow">Ruta gratuita · ${MODULES.length} módulos</span>
+    <h1>Ruta IA Data Analyst 2027</h1>
+    <p>De cero a analista de datos que trabaja con inteligencia artificial. Cada módulo combina lecturas cortas, videos de YouTube en español verificados, un cuestionario y una tarea aplicada.</p>
+    <div class="meta"><span class="chip">${TOTAL_DAYS} días</span><span class="chip">2 horas diarias</span><span class="chip">Gratis y sin registro</span></div>
+    <div class="progress"><div class="track" aria-hidden="true"><div class="fill" style="width:${doneParts / totalParts * 100}%"></div></div><span>${doneParts} de ${totalParts} partes completadas</span></div>
+  </div></header>
+  <main class="wrap overview">
+    <div class="mods">${MODULES.map(m => { const p = modProgress(m); return `
+      <a class="mod ${p.n === p.total ? 'done' : ''}" href="#modulo-${m.id}">
+        <span class="mod-num">${m.id}</span>
+        <h2>${m.title}</h2>
+        <p>${m.days} días · ${m.topics.length} temas · ${p.n === p.total ? 'Completado' : p.n ? p.n + ' de ' + p.total + ' partes' : 'Sin empezar'}</p>
+        <div class="track" aria-hidden="true"><div class="fill" style="width:${p.n / p.total * 100}%"></div></div>
+      </a>`; }).join('')}</div>
+    <p class="note">Criterios de los videos: publicados desde 2025, con más de 10 mil vistas y comentarios que respaldan que fueron útiles. Las lecturas están en español y no piden registro. Algunas herramientas, como Claude, GitHub o n8n en la nube, sí piden una cuenta gratuita para usarlas.</p>
+    <p class="foot">Creado y recopilado por <a href="https://www.linkedin.com/in/afredoamez/" target="_blank" rel="noopener">Alfredo Diego Amez Mendes</a>.</p>
+  </main>`;
+  document.title = 'Ruta IA Data Analyst 2027';
+}
+
+/* ---------- Vista Módulo ---------- */
+function seeded(seed) { let s = seed; return () => (s = (s * 9301 + 49297) % 233280) / 233280; }
+function shuffled(item, seed) {
+  const rnd = seeded(seed);
+  const idx = [0, 1, 2, 3];
+  for (let i = 3; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [idx[i], idx[j]] = [idx[j], idx[i]]; }
+  return { opts: idx.map(i => item[1][i]), ans: idx.indexOf(item[2]) };
+}
+
+function renderModule(m) {
+  const s = modState(m.id);
+  const prev = MODULES.find(x => x.id === m.id - 1), next = MODULES.find(x => x.id === m.id + 1);
+  const topics = m.topics.map((t, i) => `
+    <section class="block" id="tema-${i + 1}">
+      <div class="block-head"><div><span class="kicker">Tema ${i + 1}</span><h2>${t.t}</h2></div><span class="days">${t.d}</span></div>
+      ${resCard('read', t.read[0], t.read[1], 'Lectura · ' + t.read[2])}
+      ${t.video ? resCard('video', t.video[0], t.video[1], 'Video · ' + t.video[2]) : `<p class="novideo">${t.novideo}</p>`}
+      <p class="idea"><b>Idea clave:</b> ${t.idea}</p>
+      ${checkBtn('tema-' + (i + 1), 'Marcar tema como completado')}
+    </section>`).join('');
+  const tk = m.task;
+  const dataBlock = tk.sql
+    ? `<p class="warn">${tk.dataNote}</p><div class="sqlbox"><pre id="sql">${esc(SQL_SCRIPT)}</pre><button class="copy" type="button" data-copy="sql">Copiar</button></div>`
+    : tk.data ? resCard('data', tk.data[0], tk.data[1], tk.data[2]) + `<p class="warn">${tk.dataNote}</p>` : '';
+  app.innerHTML = `
+  <header class="hero"><div class="wrap">
+    <div class="crumbs"><a href="#inicio">← Ruta completa</a>${prev ? `<a href="#modulo-${prev.id}">Módulo ${prev.id}</a>` : ''}${next ? `<a href="#modulo-${next.id}">Módulo ${next.id} →</a>` : ''}</div>
+    <span class="eyebrow">Ruta IA Data Analyst 2027 · Módulo ${m.id} de ${MODULES.length}</span>
+    <h1>${m.title}</h1>
+    <p>${m.lead}</p>
+    <div class="meta"><span class="chip">${m.days} días</span><span class="chip">2 horas diarias</span><span class="chip">Gratis y sin registro</span></div>
+    <div class="progress"><div class="track" aria-hidden="true"><div class="fill" id="mod-fill"></div></div><span id="mod-label"></span></div>
+  </div></header>
+  <div class="wrap layout">
+    <nav class="toc" aria-label="Contenido del módulo">
+      <span class="toc-title">Contenido</span>
+      <button type="button" data-go="inicio-mod" data-part="inicio"><span class="dot">${TICK}</span>Inicio</button>
+      ${m.topics.map((_, i) => `<button type="button" data-go="tema-${i + 1}" data-part="tema-${i + 1}"><span class="dot">${TICK}</span>Tema ${i + 1}</button>`).join('')}
+      <button type="button" data-go="ia" data-part="ia"><span class="dot">${TICK}</span>IA en la práctica</button>
+      <button type="button" data-go="cuestionario" data-part="cuestionario"><span class="dot">${TICK}</span>Cuestionario</button>
+      <button type="button" data-go="tarea" data-part="tarea"><span class="dot">${TICK}</span>Tarea aplicada</button>
+    </nav>
+    <main class="content">
+      <section class="block" id="inicio-mod">
+        <div class="block-head"><h2>Al terminar este módulo podrás</h2></div>
+        <ul class="goals">${m.goals.map(g => `<li>${g}</li>`).join('')}</ul>
+        <h3>Cómo estudiar cada tema</h3>
+        <div class="steps">
+          <div class="step"><b>1. Lee</b><span>Un artículo corto para entender la idea.</span></div>
+          <div class="step"><b>2. Mira</b><span>El video de YouTube y toma notas.</span></div>
+          <div class="step"><b>3. Marca</b><span>El tema como completado para ver tu avance.</span></div>
+        </div>
+      </section>
+      ${topics}
+      <section class="block" id="ia">
+        <div class="block-head"><div><span class="kicker">Práctica</span><h2>IA en la práctica</h2></div><span class="days">Durante el módulo</span></div>
+        <p>Usa Claude o ChatGPT como compañero de estudio. Copia estos prompts y adáptalos:</p>
+        <div class="prompts">${m.ia.prompts.map(p => `<div class="prompt"><p>${p}</p><button class="copy" type="button">Copiar</button></div>`).join('')}</div>
+        <p class="warn">Compara las respuestas con lo que aprendiste: la IA puede equivocarse con total seguridad. No compartas datos confidenciales.${m.ia.note ? ' ' + m.ia.note : ''}</p>
+        ${checkBtn('ia', 'Marcar práctica como completada')}
+      </section>
+      <section class="block" id="cuestionario">
+        <div class="block-head"><div><span class="kicker">Evaluación</span><h2>Cuestionario</h2></div><span class="days">${m.quizDay}</span></div>
+        <p>10 preguntas. Elige una alternativa y verás al instante si acertaste. Apruebas con 7 o más.</p>
+        <div class="qbar"><span id="q-label">0 de 10</span><div class="track" aria-hidden="true"><div class="fill" id="q-fill"></div></div><span id="q-ok">✓ 0</span></div>
+        <div id="quiz" style="display:flex;flex-direction:column;gap:18px"></div>
+        <div class="final" id="final" hidden aria-live="polite"><p class="score" id="final-score"></p><p id="final-msg"></p><button class="btn" id="retry" type="button">Volver a intentar</button></div>
+      </section>
+      <section class="block" id="tarea">
+        <div class="block-head"><div><span class="kicker">Proyecto</span><h2>Tarea aplicada</h2></div><span class="days">${tk.day}</span></div>
+        <p class="context"><b>Contexto:</b> ${tk.context}</p>
+        ${dataBlock}
+        <h3>Qué debes hacer</h3>
+        <ol class="tasks">${tk.steps.map(x => `<li>${x}</li>`).join('')}</ol>
+        <h3>Tu tarea está completa si…</h3>
+        <div class="criteria">${tk.criteria.map((c, i) => `<label><input type="checkbox" id="m${m.id}-crit-${i}" data-crit="${i}">${c}</label>`).join('')}</div>
+        <p class="warn">Compártela: publica una captura y tu conclusión en LinkedIn contando qué aprendiste.</p>
+      </section>
+      ${next ? `<a class="next" href="#modulo-${next.id}"><span><b>Siguiente: Módulo ${next.id} · ${next.title}</b><br><span>${next.days} días · ${next.topics.length} temas</span></span><span aria-hidden="true">→</span></a>` : `<a class="next" href="#inicio"><span><b>¡Terminaste la ruta!</b><br><span>Vuelve a la vista general para revisar tu avance.</span></span><span aria-hidden="true">→</span></a>`}
+      <p class="foot">Creado y recopilado por <a href="https://www.linkedin.com/in/afredoamez/" target="_blank" rel="noopener">Alfredo Diego Amez Mendes</a>.</p>
+    </main>
+  </div>`;
+  document.title = 'Módulo ' + m.id + ' · ' + m.title;
+
+  const refresh = () => {
+    const p = parts(m), n = p.filter(x => s.done[x]).length;
+    document.getElementById('mod-fill').style.width = (n / p.length * 100) + '%';
+    document.getElementById('mod-label').textContent = n + ' de ' + p.length + ' partes completadas';
+    app.querySelectorAll('.toc button').forEach(b => b.classList.toggle('done', b.dataset.part === 'inicio' || !!s.done[b.dataset.part]));
+    app.querySelectorAll('[data-check]').forEach(b => {
+      const on = !!s.done[b.dataset.check]; b.setAttribute('aria-pressed', on);
+      b.querySelector('.lbl').textContent = on ? (b.dataset.check === 'ia' ? 'Práctica completada' : 'Tema completado') : (b.dataset.check === 'ia' ? 'Marcar práctica como completada' : 'Marcar tema como completado');
+    });
+  };
+  app.querySelectorAll('[data-check]').forEach(b => b.addEventListener('click', () => { s.done[b.dataset.check] = !s.done[b.dataset.check]; save(); refresh(); }));
+  app.querySelectorAll('.toc button').forEach(b => b.addEventListener('click', () => document.getElementById(b.dataset.go).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })));
+
+  const crits = app.querySelectorAll('[data-crit]');
+  crits.forEach(c => { c.checked = !!s.crit[c.dataset.crit]; c.addEventListener('change', () => { s.crit[c.dataset.crit] = c.checked; s.done.tarea = [...crits].every(x => x.checked); save(); refresh(); }); });
+
+  app.querySelectorAll('.copy').forEach(btn => btn.addEventListener('click', () => {
+    const el = btn.dataset.copy ? document.getElementById(btn.dataset.copy) : btn.previousElementSibling;
+    const ok = () => { btn.textContent = 'Copiado'; setTimeout(() => btn.textContent = 'Copiar', 1600); };
+    const sel = () => { const r = document.createRange(); r.selectNodeContents(el); const g = getSelection(); g.removeAllRanges(); g.addRange(r); };
+    try { navigator.clipboard.writeText(el.textContent).then(ok).catch(sel); } catch (e) { sel(); }
+  }));
+
+  // Cuestionario
+  const quiz = document.getElementById('quiz');
+  let answered = 0, correct = 0;
+  const renderQuiz = () => {
+    answered = 0; correct = 0; quiz.innerHTML = '';
+    m.quiz.forEach((item, qi) => {
+      const { opts, ans } = shuffled(item, m.id * 31 + qi * 7 + 3);
+      const card = document.createElement('div');
+      card.className = 'q';
+      card.innerHTML = `<div class="q-head"><span class="q-num">${String(qi + 1).padStart(2, '0')}</span><p class="q-text" id="m${m.id}q${qi}">${item[0]}</p></div><div class="opts" role="group" aria-labelledby="m${m.id}q${qi}"></div>`;
+      const box = card.querySelector('.opts');
+      opts.forEach((text, oi) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'opt'; b.id = `m${m.id}q${qi}o${oi}`;
+        b.innerHTML = `<span class="letter">${L[oi]}</span><span class="opt-text">${text}</span><span class="mark" aria-hidden="true"></span>`;
+        b.addEventListener('click', () => {
+          const ok = oi === ans;
+          card.querySelectorAll('.opt').forEach((x, i) => {
+            x.disabled = true;
+            if (i === oi) { x.classList.add(ok ? 'is-ok' : 'is-bad'); x.querySelector('.mark').innerHTML = ok ? TICK : CROSS; x.setAttribute('aria-label', (ok ? 'Correcta: ' : 'Incorrecta: ') + x.textContent); }
+            else if (!ok && i === ans) x.classList.add('is-answer');
+            else x.classList.add('is-dim');
+          });
+          const fb = document.createElement('p');
+          fb.className = 'feedback ' + (ok ? 'ok' : 'bad'); fb.setAttribute('role', 'status');
+          fb.innerHTML = `<strong>${ok ? '¡Correcto! ' : 'Incorrecto. La respuesta es la ' + L[ans] + '. '}</strong>${item[3]}`;
+          card.appendChild(fb);
+          answered++; if (ok) correct++; updateQuiz();
+        });
+        box.appendChild(b);
+      });
+      quiz.appendChild(card);
+    });
+    updateQuiz();
+  };
+  const updateQuiz = () => {
+    document.getElementById('q-label').textContent = answered + ' de 10';
+    document.getElementById('q-ok').textContent = '✓ ' + correct;
+    document.getElementById('q-fill').style.width = answered * 10 + '%';
+    const done = answered === m.quiz.length;
+    document.getElementById('final').hidden = !done;
+    if (done) {
+      document.getElementById('final-score').innerHTML = correct + '<span> / 10</span>';
+      document.getElementById('final-msg').textContent = correct >= 9 ? 'Excelente. Dominas los conceptos del módulo: pasa a la tarea aplicada.' : correct >= 7 ? 'Bien. Repasa las preguntas que fallaste antes de hacer la tarea aplicada.' : 'Vuelve a revisar los temas que fallaste y luego intenta de nuevo.';
+      if (correct >= 7 && !s.done.cuestionario) { s.done.cuestionario = true; save(); refresh(); }
+    }
+  };
+  document.getElementById('retry').addEventListener('click', () => { renderQuiz(); document.getElementById('cuestionario').scrollIntoView(); });
+  renderQuiz();
+  refresh();
+}
+
+function route() {
+  const h = location.hash.replace('#', '');
+  const m = MODULES.find(x => 'modulo-' + x.id === h);
+  if (m) renderModule(m); else renderOverview();
+  window.scrollTo(0, 0);
+}
+addEventListener('hashchange', route);
+route();
+</script>
+
+</body>
+</html>
