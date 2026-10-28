@@ -4,6 +4,8 @@ Ruta gratuita de **10 módulos (128 días, 2 horas diarias)** para convertirte e
 
 👉 **Empieza aquí:** https://alfredoamez-data.github.io/RutaGratisAnalistaDatos/
 
+Empieza por el **Módulo 0**, donde se explica el objetivo de la ruta.
+
 Cada módulo incluye:
 - 📖 Lecturas cortas en español, sin registro.
 - 🎥 Videos de YouTube en español verificados: publicados desde 2025, con más de 10 mil vistas y comentarios que respaldan su utilidad.
@@ -26,4 +28,12 @@ Cada módulo incluye:
 
 Tu avance se guarda en tu navegador. ¿Encontraste un video que ya no está disponible? Avísalo en los [issues](https://github.com/AlfredoAmez-Data/RutaGratisAnalistaDatos/issues).
 
-📣 Creado y recopilado por [Alfredo Diego Amez Mendes](https://www.linkedin.com/in/afredoamez/).
+## 🤝 Apoya este proyecto
+
+Esta ruta es **gratuita y sin fines de lucro**. Si deseas apoyar para que siga creciendo, puedes **yapear** a este QR:
+
+<img src="assets/yape-qr.jpg" alt="QR de Yape" width="320">
+
+¿Dudas o consultas? Escríbeme por [LinkedIn](https://www.linkedin.com/in/alfredoamez/).
+
+📣 Creado y recopilado por [Alfredo Diego Amez Mendes](https://www.linkedin.com/in/alfredoamez/).
