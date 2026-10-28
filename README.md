@@ -32,7 +32,7 @@ Tu avance se guarda en tu navegador. ¿Encontraste un video que ya no está disp
 
 Esta ruta es **gratuita y sin fines de lucro**. Si deseas apoyar para que siga creciendo, puedes **yapear** a este QR:
 
-<img src="assets/yape-qr.jpg" alt="QR de Yape" width="320">
+<img src="assets/yape-qr.png" alt="QR de Yape" width="320">
 
 ¿Dudas o consultas? Escríbeme por [LinkedIn](https://www.linkedin.com/in/alfredoamez/).
 
