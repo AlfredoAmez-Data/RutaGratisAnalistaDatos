@@ -29,7 +29,7 @@ Al terminar los 10 módulos puedes rendir un **examen final de 50 preguntas** (1
 | 10 | Proyecto final con IA | 9 |
 | 11 | Agradecimiento y siguientes pasos | — |
 
-Tu avance se guarda en tu navegador. ¿Encontraste un video que ya no está disponible? Avísalo en los [issues](https://github.com/AlfredoAmez-Data/RutaGratisAnalistaDatos/issues).
+Tu avance se guarda en tu navegador. ¿Encontraste un video que ya no está disponible? Escríbeme por [LinkedIn](https://www.linkedin.com/in/alfredoamez/).
 
 ## 🤝 Apoya este proyecto
 
